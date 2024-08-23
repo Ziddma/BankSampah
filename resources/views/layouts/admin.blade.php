@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Laravel SB Admin 2">
+    <meta name="description" content="Bank Sampah">
     <meta name="author" content="Alejandro RH">
 
     <!-- CSRF Token -->
@@ -34,7 +34,7 @@
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
             </div>
-            <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+            <div class="sidebar-brand-text mx-3">Bank Sampah <sup></sup></div>
         </a>
 
         <!-- Divider -->
@@ -62,6 +62,42 @@
                 <span>{{ __('Profile') }}</span>
             </a>
         </li>
+
+        <li class="nav-item {{ Nav::isRoute('sampah.index') }}">
+            <a class="nav-link" href="{{ route('sampah.index') }}">
+                <i class="fas fa-box"></i>
+            <span>{{ __('Sampah Masuk') }}</span>
+        </a>
+
+        </li>
+        <li class="nav-item {{ Nav::isRoute('sampah.index') }}">
+            <a class="nav-link" href="{{ route('sampah.index') }}">
+                <i class="fas fa-box-open"></i>
+            <span>{{ __('Sampah Keluar') }}</span>
+        </a>
+        </li>
+
+        <li class="nav-item {{ Nav::isRoute('sampah.index') }}">
+            <a class="nav-link" href="{{ route('sampah.index') }}">
+            <i class="fas fa-trash-alt"></i>
+            <span>{{ __('Data Sampah') }}</span>
+        </a>
+        </li>
+
+        <li class="nav-item {{ Nav::isRoute('sampah.index') }}">
+            <a class="nav-link" href="{{ route('sampah.index') }}">
+                <i class="fas fa-recycle"></i>
+            <span>{{ __('Kerajinan') }}</span>
+        </a>
+        </li>
+
+        <li class="nav-item {{ Nav::isRoute('sampah.index') }}">
+            <a class="nav-link" href="{{ route('sampah.index') }}">
+                <i class="fas fa-fw fa-money-bills"></i>
+            <span>{{ __('Data Penjualan') }}</span>
+            </a>
+        </li>
+
 
         <!-- Nav Item - About -->
         <li class="nav-item {{ Nav::isRoute('about') }}">

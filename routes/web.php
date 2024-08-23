@@ -25,6 +25,17 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/profile', 'ProfileController@index')->name('profile');
 Route::put('/profile', 'ProfileController@update')->name('profile.update');
 
+Route::get('/sampah', 'SampahController@index')->name('sampah.index');
+Route::get('/sampah/create', 'SampahController@create')->name('sampah.create');
+Route::post('/sampah', 'SampahController@store')->name('sampah.store');
+Route::get('/sampah/{id}/edit', 'SampahController@edit')->name('sampah.edit');
+Route::put('/sampah/{id}', 'SampahController@update')->name('sampah.update');
+
+Route::resource('sampah', 'SampahController');
+
+
+
+
 Route::get('/about', function () {
     return view('about');
 })->name('about');
