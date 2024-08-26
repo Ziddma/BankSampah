@@ -17,5 +17,12 @@
 .nav-link .fas {
     color: #ffffff; /* Warna ikon default */
 }
+.custom-sidebar {
+    background-color: #8BC34A;
+}
+.custom-body-bg {
+    background-color: #8BC34A;
+}
+
 
 /*# sourceMappingURL=sb-admin-2.min.css.map */

@@ -10,7 +10,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('Bank Sampah', 'Bank Sampah') }}</title>
 
     <!-- Fonts -->
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
@@ -27,15 +27,17 @@
 <!-- Page Wrapper -->
 <div id="wrapper">
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    <ul class="navbar-nav custom-sidebar sidebar sidebar-dark accordion" id="accordionSidebar">
+
 
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ url('/home') }}">
             <div class="sidebar-brand-icon rotate-n-15">
-                <i class="fas fa-laugh-wink"></i>
+                <img src="{{ asset('img/favicon.png') }}" alt="Bank Sampah Logo" width="40"> <!-- Sesuaikan lebar sesuai kebutuhan -->
             </div>
-            <div class="sidebar-brand-text mx-3">Bank Sampah <sup></sup></div>
+            <div class="sidebar-brand-text mx-3">Bank Sampah</div>
         </a>
+
 
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
@@ -63,18 +65,12 @@
             </a>
         </li>
 
-        <li class="nav-item {{ Nav::isRoute('sampah.index') }}">
-            <a class="nav-link" href="{{ route('sampah.index') }}">
-                <i class="fas fa-box"></i>
-            <span>{{ __('Sampah Masuk') }}</span>
-        </a>
-
-        </li>
-        <li class="nav-item {{ Nav::isRoute('sampah.index') }}">
-            <a class="nav-link" href="{{ route('sampah.index') }}">
-                <i class="fas fa-box-open"></i>
-            <span>{{ __('Sampah Keluar') }}</span>
-        </a>
+        <!-- Nav Item - Kategori Sampah -->
+        <li class="nav-item {{ Nav::isRoute('kategori_sampah.index') }}">
+            <a class="nav-link" href="{{ route('kategori_sampah.index') }}">
+                <i class="fas fa-boxes"></i>
+                <span>{{ __('Kategori Sampah') }}</span>
+            </a>
         </li>
 
         <li class="nav-item {{ Nav::isRoute('sampah.index') }}">
@@ -84,15 +80,15 @@
         </a>
         </li>
 
-        <li class="nav-item {{ Nav::isRoute('sampah.index') }}">
-            <a class="nav-link" href="{{ route('sampah.index') }}">
+        <li class="nav-item {{ Nav::isRoute('kerajinan.index') }}">
+            <a class="nav-link" href="{{ route('kerajinan.index') }}">
                 <i class="fas fa-recycle"></i>
             <span>{{ __('Kerajinan') }}</span>
         </a>
         </li>
 
-        <li class="nav-item {{ Nav::isRoute('sampah.index') }}">
-            <a class="nav-link" href="{{ route('sampah.index') }}">
+        <li class="nav-item {{ Nav::isRoute('penjualan.index') }}">
+            <a class="nav-link" href="{{ route('penjualan.index') }}">
                 <i class="fas fa-fw fa-money-bills"></i>
             <span>{{ __('Data Penjualan') }}</span>
             </a>
