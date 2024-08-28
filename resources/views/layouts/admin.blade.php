@@ -54,17 +54,9 @@
 
         <!-- Heading -->
         <div class="sidebar-heading">
-            {{ __('Settings') }}
+            {{ __('Fungsi Pengelolaan Sampah') }}
         </div>
-
-        <!-- Nav Item - Profile -->
-        <li class="nav-item {{ Nav::isRoute('profile') }}">
-            <a class="nav-link" href="{{ route('profile') }}">
-                <i class="fas fa-fw fa-user"></i>
-                <span>{{ __('Profile') }}</span>
-            </a>
-        </li>
-
+        
         <!-- Nav Item - Kategori Sampah -->
         <li class="nav-item {{ Nav::isRoute('kategori_sampah.index') }}">
             <a class="nav-link" href="{{ route('kategori_sampah.index') }}">
@@ -91,6 +83,22 @@
             <a class="nav-link" href="{{ route('penjualan.index') }}">
                 <i class="fas fa-fw fa-money-bills"></i>
             <span>{{ __('Data Penjualan') }}</span>
+            </a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            {{ __('Settings') }}
+        </div>
+
+        <!-- Nav Item - Profile -->
+        <li class="nav-item {{ Nav::isRoute('profile') }}">
+            <a class="nav-link" href="{{ route('profile') }}">
+                <i class="fas fa-fw fa-user"></i>
+                <span>{{ __('Profile') }}</span>
             </a>
         </li>
 
@@ -318,7 +326,7 @@
         <footer class="sticky-footer bg-white">
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; <a href="https://github.com/aleckrh" target="_blank">Aleckrh</a> {{ now()->year }}</span>
+                    <span>Copyright &copy; <a href="https://github.com/aleckrh" target="_blank">Nama Gweh</a> {{ now()->year }}</span>
                 </div>
             </div>
         </footer>

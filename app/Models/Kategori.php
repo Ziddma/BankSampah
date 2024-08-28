@@ -2,13 +2,28 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Kategori extends Model
 {
-    protected $fillable = [
-        'nama', // Assuming you have a 'nama' field for the category name
-    ];
+    use HasFactory;
 
-    // Define any relationships here if necessary
+    protected $table = 'kategori';
+
+    protected $fillable = [
+        'jenis_sampah',
+        'nama_sampah',
+        'satuan',
+        'keterangan',
+    ];
+    // Kategori.php
+    // app/Models/Kategori.php
+
+    public function sampah()
+    {
+        return $this->hasMany(Sampah::class, 'kategori_id');
+    }
+
+
 }

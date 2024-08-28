@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('main-content')
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">{{ __('Dashboard') }}</h1>
@@ -21,7 +22,6 @@
     @endif
 
     <div class="row">
-
         <!-- Earnings (Monthly) Card Example -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-primary shadow h-100 py-2">
@@ -39,7 +39,7 @@
             </div>
         </div>
 
-        <!-- Earnings (Monthly) Card Example -->
+        <!-- Earnings (Yearly) Card Example -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-success shadow h-100 py-2">
                 <div class="card-body">
@@ -56,33 +56,24 @@
             </div>
         </div>
 
-        <!-- Earnings (Monthly) Card Example -->
+        <!-- Total Berat Sampah Card Example -->
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-info shadow h-100 py-2">
+            <div class="card border-left-primary shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Stok Sampah (Total)</div>
-                            <div class="row no-gutters align-items-center">
-                                <div class="col-auto">
-                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">62 Kg</div>
-                                </div>
-                                <div class="col">
-                                    <div class="progress progress-sm mr-2">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Berat Sampah</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totalBerat }} kg</div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                            <i class="fas fa-weight fa-2x text-gray-300"></i>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Users -->
+        <!-- Users Card Example -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-warning shadow h-100 py-2">
                 <div class="card-body">
@@ -100,121 +91,87 @@
         </div>
     </div>
 
-    <div class="row">
-
-        <!-- Content Column -->
-        <div class="col-lg-6 mb-4">
-
-            <!-- Project Card Example -->
-            <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
-                </div>
-                <div class="card-body">
-                    <h4 class="small font-weight-bold">Server Migration <span class="float-right">20%</span></h4>
-                    <div class="progress mb-4">
-                        <div class="progress-bar bg-danger" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <h4 class="small font-weight-bold">Sales Tracking <span class="float-right">40%</span></h4>
-                    <div class="progress mb-4">
-                        <div class="progress-bar bg-warning" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <h4 class="small font-weight-bold">Customer Database <span class="float-right">60%</span></h4>
-                    <div class="progress mb-4">
-                        <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <h4 class="small font-weight-bold">Payout Details <span class="float-right">80%</span></h4>
-                    <div class="progress mb-4">
-                        <div class="progress-bar bg-info" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <h4 class="small font-weight-bold">Account Setup <span class="float-right">Complete!</span></h4>
-                    <div class="progress">
-                        <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Color System -->
-            <div class="row">
-                <div class="col-lg-6 mb-4">
-                    <div class="card bg-primary text-white shadow">
-                        <div class="card-body">
-                            Primary
-                            <div class="text-white-50 small">#4e73df</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 mb-4">
-                    <div class="card bg-success text-white shadow">
-                        <div class="card-body">
-                            Success
-                            <div class="text-white-50 small">#1cc88a</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 mb-4">
-                    <div class="card bg-info text-white shadow">
-                        <div class="card-body">
-                            Info
-                            <div class="text-white-50 small">#36b9cc</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 mb-4">
-                    <div class="card bg-warning text-white shadow">
-                        <div class="card-body">
-                            Warning
-                            <div class="text-white-50 small">#f6c23e</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 mb-4">
-                    <div class="card bg-danger text-white shadow">
-                        <div class="card-body">
-                            Danger
-                            <div class="text-white-50 small">#e74a3b</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 mb-4">
-                    <div class="card bg-secondary text-white shadow">
-                        <div class="card-body">
-                            Secondary
-                            <div class="text-white-50 small">#858796</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+    <!-- Buttons Row -->
+    <div class="row mb-4">
+        <div class="col-md-6 mb-2">
+            <a href="{{ route('kategori_sampah.index') }}" class="btn btn-primary btn-lg w-100">
+                <i class="fas fa-boxes"></i> {{ __('Kategori Sampah') }}
+            </a>
         </div>
+        <div class="col-md-6 mb-2">
+            <a href="{{ route('sampah.index') }}" class="btn btn-secondary btn-lg w-100">
+                <i class="fas fa-trash-alt"></i> {{ __('Data Sampah') }}
+            </a>
+        </div>
+    </div>
 
-        <div class="col-lg-6 mb-4">
+    <div class="row mb-4">
+        <div class="col-md-6 mb-2">
+            <a href="{{ route('kerajinan.index') }}" class="btn btn-success btn-lg w-100">
+                <i class="fas fa-recycle"></i> {{ __('Kerajinan') }}
+            </a>
+        </div>
+        <div class="col-md-6 mb-2">
+            <a href="{{ route('penjualan.index') }}" class="btn btn-warning btn-lg w-100">
+                <i class="fas fa-fw fa-money-bills"></i> {{ __('Data Penjualan') }}
+            </a>
+        </div>
+    </div>
 
-            <!-- Illustrations -->
-            <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
-                </div>
-                <div class="card-body">
-                    <div class="text-center">
-                        <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="{{ asset('img/svg/undraw_editable_dywm.svg') }}" alt="">
-                    </div>
-                    <p>Add some quality, svg illustrations to your project courtesy of <a target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a constantly updated collection of beautiful svg images that you can use completely free and without attribution!</p>
-                    <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on unDraw →</a>
-                </div>
+    <!-- Chart Section -->
+    <div class="row">
+        <!-- Content Column -->
+        <div class="col-lg-12 mb-4">
+            <h2 style="font-size: 30px; color: #262626;">Jumlah Stock Sampah</h2>
+            <div class="container">
+                <canvas id="myChart" width="100%" height="50%"></canvas>
             </div>
 
-            <!-- Approach -->
-            <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
-                </div>
-                <div class="card-body">
-                    <p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce CSS bloat and poor page performance. Custom CSS classes are used to create custom components and custom utility classes.</p>
-                    <p class="mb-0">Before working with this theme, you should become familiar with the Bootstrap framework, especially the utility classes.</p>
-                </div>
-            </div>
-
+            <script>
+                var ctx = document.getElementById("myChart").getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: [
+                            "Kresek", "Plastik", "Karah Warna", "Botol mineral plastik", 
+                            "Botol mineral kaca", "Gelas mineral plastik", "Kaleng", 
+                            "Kardus/Karton", "Dedaunan", "Sampah hasil masak", "Besi", 
+                            "Baja", "Tembaga", "Aluminium", "Zeng", "Kain", 
+                            "Sandal dan Sepatu", "Lampu"
+                        ],
+                        datasets: [{
+                            label: 'Jumlah Stock (Kg)',
+                            data: [
+                                20, 30, 15, 10, 8, 12, 5, 25, 40, 35, 18, 22, 7, 13, 9, 4, 11, 6
+                            ],
+                            backgroundColor: [
+                                'rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 
+                                'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 
+                                'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)', 
+                                'rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 
+                                'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 
+                                'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)', 
+                                'rgba(55, 100, 180, 1)', 'rgba(60, 170, 240, 1)', 
+                                'rgba(25, 20, 80, 1)', 'rgba(175, 195, 195, 1)', 
+                                'rgba(150, 100, 250, 1)', 'rgba(77, 66, 55, 1)'
+                            ],
+                            borderColor: 'transparent',
+                            borderWidth: 2.5,
+                            barPercentage: 0.8,
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    stepSize: 5
+                                }
+                            }
+                        }
+                    }
+                });
+            </script>
         </div>
     </div>
 @endsection

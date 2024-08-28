@@ -19,7 +19,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <h5 class="font-weight-bold">Bank Sampah</h5>
-                            <p>Bank Sampah untuk Sd Islam Bintang Juara.</p>
+                            <p>Bank Sampah untuk SD Islam Bintang Juara.</p>
                             <p>Recommend to install this preset on a project that you are starting from scratch, otherwise your project's design might break.</p>
                             <p>If you found this project useful, then please consider giving it a ⭐</p>
                             <a href="https://github.com/aleckrh/laravel-sb-admin-2" target="_blank" class="btn btn-github">

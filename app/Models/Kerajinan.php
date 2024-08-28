@@ -14,11 +14,10 @@ class Kerajinan extends Model
         'bahan',
         'tanggal_dibuat',
         'pengrajin',
-        'sumber_kerajinan',
     ];
 
-    protected $dates = [
-        'tanggal_dibuat',
-    ];
+    protected $dates = ['tanggal_dibuat'];
+
+
 }
 

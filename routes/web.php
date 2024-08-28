@@ -40,12 +40,9 @@ Route::resource('sampah', 'SampahController');
 
 Route::resource('penjualan', PenjualanController::class);
 
-Route::resource('kategori_sampah', KategoriSampahController::class);
-
 Route::resource('kerajinan', KerajinanController::class);
 
-
-
+Route::resource('kategori_sampah', KategoriSampahController::class);
 
 Route::get('/about', function () {
     return view('about');

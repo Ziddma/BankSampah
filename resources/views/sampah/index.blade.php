@@ -1,3 +1,5 @@
+<!-- resources/views/sampah/index.blade.php -->
+
 @extends('layouts.admin')
 
 @section('title', 'Data Sampah')
@@ -53,6 +55,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Nama Sampah</th>
+                        <th>Jenis Sampah</th>
                         <th>Kategori</th>
                         <th>Berat (kg)</th>
                         <th>Tanggal Diterima</th>
@@ -66,17 +69,30 @@
                         <tr>
                             <td>{{ $item->id }}</td>
                             <td>{{ $item->nama_sampah }}</td>
-                            <td>{{ $item->kategori }}</td>
+                            <td>{{ ucfirst($item->jenis_sampah) }}</td>
+                            <td>{{ $item->kategori ? $item->kategori->nama_sampah : 'N/A' }}</td>
                             <td>{{ $item->berat }}</td>
-                            <td>{{ $item->tanggal_diterima->format('d-m-Y') }}</td>
-                            <td>{{ $item->penerima->name }}</td>
-                            <td>{{ $item->sumber_sampah }}</td> <!-- Update to use input from form -->
+                            <td>{{ \Carbon\Carbon::parse($item->tanggal_diterima)->format('d-m-Y') }}</td>
+                            <td>{{ $item->penerima->name ?? 'N/A' }}</td>
+                            <td>{{ $item->sumber_sampah }}</td>
                             <td>
                                 <a href="{{ route('sampah.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                <form action="{{ route('sampah.destroy', $item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus Sampah ini?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4" class="text-right"><strong>Total Berat Sampah:</strong></td>
+                        <td><strong>{{ $totalBerat }} kg</strong></td>
+                        <td colspan="4"></td>
+                    </tr>
+                </tfoot>
             </table>
         </div>
     </div>

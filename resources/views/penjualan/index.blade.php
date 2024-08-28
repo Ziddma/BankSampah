@@ -31,9 +31,11 @@
                         <th>ID Penjualan</th>
                         <th>Nama Barang</th>
                         <th>Kategori Barang</th>
+                        <th>Jumlah</th>
                         <th>Satuan</th>
                         <th>Tanggal Penjualan</th>
                         <th>Harga</th>
+                        <th>Total Harga</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -43,6 +45,7 @@
                             <td>{{ $item->idPenjualan }}</td>
                             <td>{{ $item->namaBarang }}</td>
                             <td>{{ $item->kategoriBarang }}</td>
+                            <td>{{$item->jumlah</td>
                             <td>{{ $item->satuan }}</td>
                             <td>{{ date('d-m-Y', strtotime($item->tglPenjualan)) }}</td>
                             <td>{{ number_format($item->harga, 0, ',', '.') }}</td>

@@ -32,10 +32,6 @@
                 <label for="pengrajin">Pengrajin</label>
                 <input type="text" id="pengrajin" name="pengrajin" class="form-control" value="{{ request('pengrajin') }}">
             </div>
-            <div class="form-group col-md-4">
-                <label for="sumber_kerajinan">Sumber Kerajinan</label>
-                <input type="text" id="sumber_kerajinan" name="sumber_kerajinan" class="form-control" value="{{ request('sumber_kerajinan') }}">
-            </div>
         </div>
         <button type="submit" class="btn btn-primary">Filter</button>
     </form>
@@ -53,7 +49,6 @@
                         <th>Bahan</th>
                         <th>Tanggal Dibuat</th>
                         <th>Pengrajin</th>
-                        <th>Sumber Kerajinan</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -64,11 +59,17 @@
                             <td>{{ $item->nama_kerajinan }}</td>
                             <td>{{ $item->kategori }}</td>
                             <td>{{ $item->bahan }}</td>
-                            <td>{{ $item->tanggal_dibuat->format('d-m-Y') }}</td>
+                            <td>{{ $item->tanggal_dibuat }}</td>
                             <td>{{ $item->pengrajin }}</td>
-                            <td>{{ $item->sumber_kerajinan }}</td>
                             <td>
                                 <a href="{{ route('kerajinan.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
+
+                                <!-- Tombol Hapus -->
+                                <form action="{{ route('kerajinan.destroy', $item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus kerajinan ini?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Sampah;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -28,9 +29,11 @@ class HomeController extends Controller
 
         $widget = [
             'users' => $users,
-            //...
+            // Add other widgets here...
         ];
 
-        return view('home', compact('widget'));
+        $totalBerat = Sampah::sum('berat');
+
+        return view('home', compact('widget', 'totalBerat'));
     }
 }

@@ -29,6 +29,11 @@
         </div>
 
         <div class="form-group">
+            <label for="jumlah">Jumlah</label>
+            <input type="number" name="jumlah" class="form-control" id="jumlah" value="{{ old('jumlah') }}" required>
+        </div>
+
+        <div class="form-group">
             <label for="satuan">Satuan</label>
             <input type="text" name="satuan" class="form-control" id="satuan" value="{{ old('satuan') }}" required>
         </div>
@@ -41,6 +46,11 @@
         <div class="form-group">
             <label for="harga">Harga</label>
             <input type="number" name="harga" class="form-control" id="harga" value="{{ old('harga') }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="totalHarga">Total Harga</label>
+            <input type="number" name="totalHarga" class="form-control" id="totalHarga" value="{{ old('totalHarga') }}" readonly>
         </div>
 
         <button type="submit" class="btn btn-success">Simpan</button>

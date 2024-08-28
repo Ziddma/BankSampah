@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Penjualan;
+use Carbon\Carbon;
 
 class PenjualanController extends Controller
 {
@@ -27,14 +28,27 @@ class PenjualanController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'namaBarang' => 'required',
-            'kategoriBarang' => 'required',
-            'satuan' => 'required',
+            'namaBarang' => 'required|string|max:255',
+            'kategoriBarang' => 'required|string|max:255',
+            'jumlah' => 'required|integer',
+            'satuan' => 'required|string|max:255',
             'tglPenjualan' => 'required|date',
-            'harga' => 'required|numeric',
+            'harga' => 'required|integer',
         ]);
 
-        Penjualan::create($request->all());
+        $jumlah = $request->input('jumlah');
+        $harga = $request->input('harga');
+        $totalHarga = $jumlah * $harga; // Calculate totalHarga
+
+        penjualan::create([
+            'namaBarang' => $request->input('namaBarang'),
+            'kategoriBarang' => $request->input('kategoriBarang'),
+            'jumlah' => $request->input('jumlah'),
+            'satuan' => $request->input('satuan'),
+            'tglPenjualan' => $request->input('tglPenjualan'),
+            'harga' => $request->input('harga'),
+            'totalHarga' => $totalHarga,
+            ]);
 
         return redirect()->route('penjualan.index')->with('success', 'Data Penjualan berhasil ditambahkan.');
     }
@@ -42,6 +56,7 @@ class PenjualanController extends Controller
     public function edit($id)
     {
         $penjualan = Penjualan::findOrFail($id);
+        $penjualan->tglPenjualan = Carbon::parse($penjualan->tglPenjualan); // Ensure it's a Carbon instance
         return view('penjualan.edit', compact('penjualan'));
     }
 

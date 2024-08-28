@@ -31,13 +31,18 @@
         </div>
 
         <div class="form-group">
+            <label for="jumlah">Jumlah</label>
+            <input type="number" name="jumlah" class="form-control" id="jumlah" value="{{ old('jumlah', $penjualan->jumlah) }}" required>
+        </div>
+
+        <div class="form-group">
             <label for="satuan">Satuan</label>
             <input type="text" name="satuan" class="form-control" id="satuan" value="{{ old('satuan', $penjualan->satuan) }}" required>
         </div>
 
         <div class="form-group">
             <label for="tglPenjualan">Tanggal Penjualan</label>
-            <input type="date" name="tglPenjualan" class="form-control" id="tglPenjualan" value="{{ old('tglPenjualan', $penjualan->tglPenjualan->format('Y-m-d')) }}" required>
+            <input type="date" name="tglPenjualan" class="form-control" id="tglPenjualan" value="{{ old('tglPenjualan', \Carbon\Carbon::parse($penjualan->tglPenjualan)->format('Y-m-d')) }}" required>
         </div>
 
         <div class="form-group">

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kerajinan;
 use Illuminate\Http\Request;
-
+use Carbon\Carbon;
 
 class KerajinanController extends Controller
 {
@@ -57,6 +57,9 @@ class KerajinanController extends Controller
     // Show the form for editing the specified resource
     public function edit(Kerajinan $kerajinan)
     {
+        // Pastikan tanggal_dibuat adalah objek DateTime atau Carbon
+        $kerajinan->tanggal_dibuat = Carbon::parse($kerajinan->tanggal_dibuat)->format('Y-m-d');
+
         return view('kerajinan.edit', compact('kerajinan'));
     }
 
@@ -69,7 +72,6 @@ class KerajinanController extends Controller
             'bahan' => 'required|string|max:255',
             'tanggal_dibuat' => 'required|date',
             'pengrajin' => 'required|string|max:255',
-            'sumber_kerajinan' => 'nullable|string|max:255',
         ]);
 
         $kerajinan->update($validatedData);
