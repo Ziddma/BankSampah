@@ -10,14 +10,31 @@ class PenjualanController extends Controller
 {
     public function index()
     {
-        
-        $penjualan = Penjualan::all();
+        // Retrieve all sales data
+        $penjualan = Penjualan::all()->map(function ($item) {
+            $item->tglPenjualan = Carbon::parse($item->tglPenjualan);
+            return $item;
+        });
 
-        // Calculate the total revenue
-        $totalPendapatan = $penjualan->sum('harga');
-    
+        // Calculate the total revenue (yearly)
+        $totalPendapatanTahun = $this->calculateTotalRevenue($penjualan);
+
+        // Calculate the total revenue for the current month
+        $totalPendapatanBulan = $this->calculateTotalRevenue(
+            $penjualan->filter(function($item) {
+                return $item->tglPenjualan->greaterThanOrEqualTo(Carbon::now()->startOfMonth());
+            })
+        );
+
         // Pass the total revenue to the view
-        return view('penjualan.index', compact('penjualan', 'totalPendapatan'));
+        return view('penjualan.index', compact('penjualan', 'totalPendapatanBulan', 'totalPendapatanTahun'));
+    }
+
+    private function calculateTotalRevenue($penjualan)
+    {
+        return $penjualan->sum(function($item) {
+            return $item->jumlah * $item->harga;
+        });
     }
 
     public function create()
@@ -27,28 +44,18 @@ class PenjualanController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'namaBarang' => 'required|string|max:255',
             'kategoriBarang' => 'required|string|max:255',
-            'jumlah' => 'required|integer',
+            'jumlah' => 'required|integer|min:1',
             'satuan' => 'required|string|max:255',
             'tglPenjualan' => 'required|date',
-            'harga' => 'required|integer',
+            'harga' => 'required|numeric|min:0',
         ]);
 
-        $jumlah = $request->input('jumlah');
-        $harga = $request->input('harga');
-        $totalHarga = $jumlah * $harga; // Calculate totalHarga
+        $totalHarga = $validatedData['jumlah'] * $validatedData['harga'];
 
-        penjualan::create([
-            'namaBarang' => $request->input('namaBarang'),
-            'kategoriBarang' => $request->input('kategoriBarang'),
-            'jumlah' => $request->input('jumlah'),
-            'satuan' => $request->input('satuan'),
-            'tglPenjualan' => $request->input('tglPenjualan'),
-            'harga' => $request->input('harga'),
-            'totalHarga' => $totalHarga,
-            ]);
+        Penjualan::create(array_merge($validatedData, ['totalHarga' => $totalHarga]));
 
         return redirect()->route('penjualan.index')->with('success', 'Data Penjualan berhasil ditambahkan.');
     }
@@ -62,16 +69,19 @@ class PenjualanController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'namaBarang' => 'required',
-            'kategoriBarang' => 'required',
-            'satuan' => 'required',
+        $validatedData = $request->validate([
+            'namaBarang' => 'required|string|max:255',
+            'kategoriBarang' => 'required|string|max:255',
+            'jumlah' => 'required|integer|min:1',
+            'satuan' => 'required|string|max:255',
             'tglPenjualan' => 'required|date',
-            'harga' => 'required|numeric',
+            'harga' => 'required|numeric|min:0',
         ]);
 
         $penjualan = Penjualan::findOrFail($id);
-        $penjualan->update($request->all());
+        $totalHarga = $validatedData['jumlah'] * $validatedData['harga'];
+
+        $penjualan->update(array_merge($validatedData, ['totalHarga' => $totalHarga]));
 
         return redirect()->route('penjualan.index')->with('success', 'Data Penjualan berhasil diupdate.');
     }

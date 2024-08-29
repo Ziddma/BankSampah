@@ -11,16 +11,18 @@ class Penjualan extends Model
 
     protected $table = 'penjualan';
 
-    protected $primaryKey = 'idPenjualan';
+    protected $primaryKey = 'id';
 
     public $timestamps = false;
 
     protected $fillable = [
         'namaBarang',
         'kategoriBarang',
+        'jumlah',
         'satuan',
         'tglPenjualan',
         'harga',
+        'totalHarga',
     ];
 
     protected $dates = ['tglPenjualan'];

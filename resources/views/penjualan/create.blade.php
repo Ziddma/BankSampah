@@ -57,4 +57,16 @@
         <a href="{{ route('penjualan.index') }}" class="btn btn-secondary">Batal</a>
     </form>
 
+    <script>
+        document.getElementById('jumlah').addEventListener('input', calculateTotal);
+        document.getElementById('harga').addEventListener('input', calculateTotal);
+
+        function calculateTotal() {
+            var jumlah = document.getElementById('jumlah').value;
+            var harga = document.getElementById('harga').value;
+            var total = jumlah * harga;
+            document.getElementById('totalHarga').value = total ? total : 0;
+        }
+    </script>
+
 @endsection

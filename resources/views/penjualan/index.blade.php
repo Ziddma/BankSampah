@@ -42,30 +42,36 @@
                 <tbody>
                     @foreach($penjualan as $item)
                         <tr>
-                            <td>{{ $item->idPenjualan }}</td>
+                            <td>{{ $item->id }}</td> <!-- Changed from idPenjualan to id -->
                             <td>{{ $item->namaBarang }}</td>
                             <td>{{ $item->kategoriBarang }}</td>
-                            <td>{{$item->jumlah</td>
+                            <td>{{ $item->jumlah }}</td>
                             <td>{{ $item->satuan }}</td>
-                            <td>{{ date('d-m-Y', strtotime($item->tglPenjualan)) }}</td>
+                            <td>{{ $item->tglPenjualan->format('d-m-Y') }}</td> <!-- Using Carbon for date formatting -->
                             <td>{{ number_format($item->harga, 0, ',', '.') }}</td>
+                            <td>{{ number_format($item->totalHarga, 0, ',', '.') }}</td>
                             <td>
-                                <a href="{{ route('penjualan.edit', $item->idPenjualan) }}" class="btn btn-warning btn-sm">Edit</a>
-
-                                <form action="{{ route('penjualan.destroy', $item->idPenjualan) }}" method="POST" style="display:inline;">
+                                <a href="{{ route('penjualan.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                <!-- Tombol Hapus -->
+                                <form action="{{ route('penjualan.destroy', $item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus kerajinan ini?');">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this item?')">Delete</button>
+                                    <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
                                 </form>
                             </td>
                         </tr>
                     @endforeach
                     <tr>
-                        <td colspan="5" class="text-right font-weight-bold">Total Pendapatan: </td>
-                        <td colspan="2" class="font-weight-bold">Rp. {{ number_format($totalPendapatan, 0, ',', '.') }}</td>
+                        <td colspan="5" class="text-right font-weight-bold">Total Pendapatan Bulan Ini: </td>
+                        <td colspan="3" class="font-weight-bold">Rp. {{ number_format($totalPendapatanBulan, 0, ',', '.') }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" class="text-right font-weight-bold">Total Pendapatan Tahun Ini: </td>
+                        <td colspan="3" class="font-weight-bold">Rp. {{ number_format($totalPendapatanTahun, 0, ',', '.') }}</td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
+
 @endsection
