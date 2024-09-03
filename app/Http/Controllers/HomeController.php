@@ -25,15 +25,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $users = User::count();
+        //$users = User::count();
 
-        $widget = [
-            'users' => $users,
-            // Add other widgets here...
-        ];
+        // $widget = [
+        //     'users' => $users,
+        //     // Add other widgets here...
+        // ];
 
-        $totalBerat = Sampah::sum('berat');
+        //$totalBerat = Sampah::sum('berat');
 
-        return view('home', compact('widget', 'totalBerat'));
+        return view('home');
     }
 }

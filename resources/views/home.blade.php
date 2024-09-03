@@ -63,7 +63,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Berat Sampah</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totalBerat }} kg</div>
+                            {{-- <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totalBerat }} kg</div> --}}
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-weight fa-2x text-gray-300"></i>
@@ -80,7 +80,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">{{ __('Users') }}</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $widget['users'] }}</div>
+                            {{-- <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $widget['users'] }}</div> --}}
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-users fa-2x text-gray-300"></i>
@@ -105,18 +105,18 @@
         </div>
     </div>
 
-    <div class="row mb-4">
+    {{-- <div class="row mb-4">
         <div class="col-md-6 mb-2">
             <a href="{{ route('kerajinan.index') }}" class="btn btn-success btn-lg w-100">
                 <i class="fas fa-recycle"></i> {{ __('Kerajinan') }}
             </a>
-        </div>
-        <div class="col-md-6 mb-2">
+        </div> --}}
+        {{-- <div class="col-md-6 mb-2">
             <a href="{{ route('penjualan.index') }}" class="btn btn-warning btn-lg w-100">
                 <i class="fas fa-fw fa-money-bills"></i> {{ __('Data Penjualan') }}
             </a>
         </div>
-    </div>
+    </div> --}}
 
     <!-- Chart Section -->
     <div class="row">

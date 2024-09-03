@@ -2,9 +2,13 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SampahController;
-use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\KategoriSampahController;
+use App\Http\Controllers\SampahMasukController;
+use App\Http\Controllers\KerajinanKeluarController;
+use App\Http\Controllers\KerajinanMasukController;
+use App\Http\Controllers\SampahKeluarController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -29,20 +33,28 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/profile', 'ProfileController@index')->name('profile');
 Route::put('/profile', 'ProfileController@update')->name('profile.update');
 
-Route::get('/sampah', 'SampahController@index')->name('sampah.index');
-Route::get('/sampah/create', 'SampahController@create')->name('sampah.create');
-Route::post('/sampah', 'SampahController@store')->name('sampah.store');
-Route::get('/sampah/{id}/edit', 'SampahController@edit')->name('sampah.edit');
-Route::put('/sampah/{id}', 'SampahController@update')->name('sampah.update');
-Route::delete('/sampah/{id}', [SampahController::class, 'destroy'])->name('sampah.destroy');
+Route::get('/sampah', 'SampahMasukController@index')->name('sampah-masuk.index');
 
-Route::resource('sampah', 'SampahController');
+// Route::get('/sampah/create', 'SampahController@create')->name('sampah.create');
+// Route::post('/sampah', 'SampahController@store')->name('sampah.store');
+// Route::get('/sampah/{id}/edit', 'SampahController@edit')->name('sampah.edit');
+// Route::put('/sampah/{id}', 'SampahController@update')->name('sampah.update');
 
-Route::resource('penjualan', PenjualanController::class);
 
-Route::resource('kerajinan', KerajinanController::class);
+Route::resource('sampah', 'SampahMasukController');
 
+
+
+//Route Baru Zidni
 Route::resource('kategori_sampah', KategoriSampahController::class);
+Route::resource('sampah-masuk', SampahMasukController::class);
+Route::resource('kerajinan-keluar', KerajinanKeluarController::class);
+Route::resource('kerajinan-masuk', KerajinanMasukController::class);
+Route::resource('sampah-keluar', SampahKeluarController::class);
+
+
+
+
 
 Route::get('/about', function () {
     return view('about');

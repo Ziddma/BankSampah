@@ -72,19 +72,19 @@
         </a>
         </li>
 
-        <li class="nav-item {{ Nav::isRoute('kerajinan.index') }}">
+        {{-- <li class="nav-item {{ Nav::isRoute('kerajinan.index') }}">
             <a class="nav-link" href="{{ route('kerajinan.index') }}">
                 <i class="fas fa-recycle"></i>
             <span>{{ __('Kerajinan') }}</span>
         </a>
-        </li>
+        </li> --}}
 
-        <li class="nav-item {{ Nav::isRoute('penjualan.index') }}">
+        {{-- <li class="nav-item {{ Nav::isRoute('penjualan.index') }}">
             <a class="nav-link" href="{{ route('penjualan.index') }}">
                 <i class="fas fa-fw fa-money-bills"></i>
             <span>{{ __('Data Penjualan') }}</span>
             </a>
-        </li>
+        </li> --}}
 
         <!-- Divider -->
         <hr class="sidebar-divider">
@@ -281,7 +281,7 @@
                     <!-- Nav Item - User Information -->
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
+                            {{-- <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span> --}}
                             <figure class="img-profile rounded-circle avatar font-weight-bold" data-initial="{{ Auth::user()->name[0] }}"></figure>
                         </a>
                         <!-- Dropdown - User Information -->
