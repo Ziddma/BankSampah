@@ -58,12 +58,20 @@
         </div>
         
         <!-- Nav Item - Kategori Sampah -->
-        <li class="nav-item {{ Nav::isRoute('kategori_sampah.index') }}">
-            <a class="nav-link" href="{{ route('kategori_sampah.index') }}">
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMasterData" aria-expanded="true" aria-controls="collapseMasterData">
                 <i class="fas fa-boxes"></i>
-                <span>{{ __('Kategori Sampah') }}</span>
+                <span>{{ __('Master Data') }}</span>
             </a>
-        </li>
+            <div id="collapseMasterData" class="collapse" aria-labelledby="headingMasterData" data-parent="#accordionSidebar">
+                <div class="py-2 collapse-inner rounded" style="background-color: transparent;">
+                    <!-- Hapus atau komentari baris di bawah ini jika Anda tidak ingin menampilkan header -->
+                    <!-- <h6 class="collapse-header">{{ __('Master Data Options') }}</h6> -->
+                    <a class="collapse-item {{ Nav::isRoute('kategori_sampah.index') }}" href="{{ route('kategori_sampah.index') }}" style="color: white; transition: color 0.3s;" onmouseover="this.style.color='black'" onmouseout="this.style.color='white'">{{ __('Kategori') }}</a>
+                    <a class="collapse-item {{ Nav::isRoute('kategori_sampah.index') }}" href="{{ route('kategori_sampah.index') }}" style="color: white; transition: color 0.3s;" onmouseover="this.style.color='black'" onmouseout="this.style.color='white'">{{ __('kategori') }}</a>
+                </div>
+            </div>
+        </li>        
 
         <li class="nav-item {{ Nav::isRoute('sampah.index') }}">
             <a class="nav-link" href="{{ route('sampah.index') }}">

@@ -23,14 +23,22 @@ class SampahMasukController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_siswa' => 'required|string|max:255',
-            'kategori_id' => 'required|exists:kategori_sampah,id',
-            'jumlah' => 'required|numeric|min:0',
-            'satuan' => 'required|string|max:255',
-            'tanggal' => 'required|date',
+            'nama_siswa.*' => 'required|string|max:255',
+            'kategori_id.*' => 'required|integer|exists:kategori_sampah,id',
+            'jumlah.*' => 'required|numeric',
+            'satuan.*' => 'required|string',
+            'tanggal.*' => 'required|date',
         ]);
-
-        SampahMasuk::create($request->all());
+    
+        foreach ($request->nama_siswa as $index => $nama_siswa) {
+            SampahMasuk::create([
+                'nama_siswa' => $nama_siswa,
+                'kategori_id' => $request->kategori_id[$index],
+                'jumlah' => $request->jumlah[$index],
+                'satuan' => $request->satuan[$index],
+                'tanggal' => $request->tanggal[$index],
+            ]);
+        }
 
         return redirect()->route('sampah-masuk.index')
             ->with('success', 'Data sampah masuk berhasil ditambahkan.');
