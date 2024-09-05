@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\KerajinanKeluar;
+use App\Models\KategoriSampah;
+use App\Models\SatuanSampah;
 use Illuminate\Http\Request;
 
 class KerajinanKeluarController extends Controller
@@ -15,23 +17,26 @@ class KerajinanKeluarController extends Controller
 
     public function create()
     {
-        return view('kerajinan_keluar.create');
+        $kategoriSampah = KategoriSampah::all();
+        $satuanSampah = SatuanSampah::all();
+
+        return view('kerajinan_keluar.create', compact('kategoriSampah', 'satuanSampah'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'nama_kerajinan' => 'required|string|max:255',
-            'deskripsi' => 'nullable|string',
-            'jumlah' => 'required|integer|min:1',
-            'harga' => 'required|numeric|min:0',
-            'pembeli' => 'nullable|string|max:255',
-            'tanggal_keluar' => 'required|date',
+            'kategori_id' => 'required|exists:kategori_sampah,id',
+            'jumlah' => 'required|numeric|min:0',
+            'satuan_id' => 'required|exists:satuan_sampah,id',
+            'nama_tujuan' => 'required|string|max:255',
+            'tanggal' => 'required|date',
+            'keterangan' => 'nullable|string',
         ]);
 
         KerajinanKeluar::create($request->all());
 
-        return redirect()->route('kerajinan-keluar.index')
+        return redirect()->route('kerajinan_keluar.index')
             ->with('success', 'Data kerajinan keluar berhasil ditambahkan.');
     }
 
@@ -42,31 +47,33 @@ class KerajinanKeluarController extends Controller
 
     public function edit(KerajinanKeluar $kerajinanKeluar)
     {
-        return view('kerajinan_keluar.edit', compact('kerajinanKeluar'));
+        $kategoriSampah = KategoriSampah::all();
+        $satuanSampah = SatuanSampah::all();
+        return view('kerajinan_keluar.edit', compact('kerajinanKeluar', 'kategoriSampah', 'satuanSampah'));
     }
 
     public function update(Request $request, KerajinanKeluar $kerajinanKeluar)
     {
         $request->validate([
-            'nama_kerajinan' => 'required|string|max:255',
-            'deskripsi' => 'nullable|string',
-            'jumlah' => 'required|integer|min:1',
-            'harga' => 'required|numeric|min:0',
-            'pembeli' => 'nullable|string|max:255',
-            'tanggal_keluar' => 'required|date',
+            'kategori_id' => 'required|exists:kategori_sampah,id',
+            'jumlah' => 'required|numeric|min:0',
+            'satuan_id' => 'required|exists:satuan_sampah,id',
+            'nama_tujuan' => 'required|string|max:255',
+            'tanggal' => 'required|date',
+            'keterangan' => 'nullable|string',
         ]);
 
         $kerajinanKeluar->update($request->all());
 
-        return redirect()->route('kerajinan-keluar.index')
-            ->with('success', 'Data kerajinan keluar berhasil diperbarui.');
+        return redirect()->route('kerajinan_keluar.index')
+            ->with('success', 'Data kerajinan keluar berhasil diupdate.');
     }
 
     public function destroy(KerajinanKeluar $kerajinanKeluar)
     {
         $kerajinanKeluar->delete();
 
-        return redirect()->route('kerajinan-keluar.index')
+        return redirect()->route('kerajinan_keluar.index')
             ->with('success', 'Data kerajinan keluar berhasil dihapus.');
     }
 }

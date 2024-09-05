@@ -80,6 +80,22 @@
         </a>
         </li>
 
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseKerajinan" aria-expanded="true" aria-controls="collapseKerajinan">
+                <i class="fas fa-recycle"></i>
+                <span>{{ __('Kerajinan') }}</span>
+            </a>
+            <div id="collapseKerajinan" class="collapse" aria-labelledby="headingKerajinan" data-parent="#accordionSidebar">
+                <div class="py-2 collapse-inner rounded" style="background-color: transparent;">
+                    <!-- Hapus atau komentari baris di bawah ini jika Anda tidak ingin menampilkan header -->
+                    <!-- <h6 class="collapse-header">{{ __('Kerajinan Options') }}</h6> -->
+                    <a class="collapse-item {{ Nav::isRoute('kerajinan_masuk.index') }}" href="{{ route('kerajinan_masuk.index') }}" style="color: white; transition: color 0.3s;" onmouseover="this.style.color='black'" onmouseout="this.style.color='white'">{{ __('Input Kerajinan') }}</a>
+                    <a class="collapse-item {{ Nav::isRoute('kerajinan_keluar.index') }}" href="{{ route('kerajinan_keluar.index') }}" style="color: white; transition: color 0.3s;" onmouseover="this.style.color='black'" onmouseout="this.style.color='white'">{{ __('Request Sampah') }}</a>
+                </div>
+            </div>
+        </li>
+          
+
         {{-- <li class="nav-item {{ Nav::isRoute('kerajinan.index') }}">
             <a class="nav-link" href="{{ route('kerajinan.index') }}">
                 <i class="fas fa-recycle"></i>

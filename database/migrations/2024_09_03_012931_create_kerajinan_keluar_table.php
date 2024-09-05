@@ -10,12 +10,12 @@ return new class extends Migration
     {
         Schema::create('kerajinan_keluar', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_kerajinan');
-            $table->text('deskripsi')->nullable();
-            $table->integer('jumlah');
-            $table->decimal('harga', 10, 2);
-            $table->string('pembeli')->nullable();
-            $table->date('tanggal_keluar');
+            $table->foreignId('kategori_id')->constrained('kategori_sampah');
+            $table->decimal('jumlah', 10, 2);
+            $table->foreignId('satuan_id')->constrained('satuan_sampah');
+            $table->string('nama_tujuan');
+            $table->date('tanggal');
+            $table->text('keterangan')->nullable();
             $table->timestamps();
         });
     }

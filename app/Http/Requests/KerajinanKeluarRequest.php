@@ -6,20 +6,20 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class KerajinanKeluarRequest extends FormRequest
 {
-    public function authorize(): bool
+    public function authorize()
     {
         return true;
     }
 
-    public function rules(): array
+    public function rules()
     {
         return [
-            'nama_kerajinan' => 'required|string|max:255',
-            'deskripsi' => 'nullable|string',
-            'jumlah' => 'required|integer|min:1',
-            'harga' => 'required|numeric|min:0',
-            'pembeli' => 'nullable|string|max:255',
-            'tanggal_keluar' => 'required|date',
+            'kategori_id' => 'required|exists:kategori_sampah,id',
+            'jumlah' => 'required|numeric|min:0',
+            'satuan_id' => 'required|exists:satuan_sampah,id',
+            'nama_tujuan' => 'required|string|max:255',
+            'tanggal' => 'required|date',
+            'keterangan' => 'nullable|string',
         ];
     }
 }

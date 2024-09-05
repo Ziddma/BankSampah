@@ -10,16 +10,12 @@ class KerajinanMasuk extends Model
     use HasFactory;
 
     protected $table = 'kerajinan_masuk';
-    
+
     protected $fillable = [
         'nama_kerajinan',
         'deskripsi',
         'jumlah',
         'pembuat',
         'tanggal_masuk',
-    ];
-
-    protected $casts = [
-        'tanggal_masuk' => 'date',
     ];
 }

@@ -9,18 +9,24 @@ class KerajinanKeluar extends Model
 {
     use HasFactory;
 
-    protected $table = 'kerajinan_keluar';
-    
+    protected $table = 'kerajinan_keluar'; // Pastikan nama tabel sesuai
+
     protected $fillable = [
-        'nama_kerajinan',
-        'deskripsi',
+        'kategori_id',
         'jumlah',
-        'harga',
-        'pembeli',
-        'tanggal_keluar',
+        'satuan_id',
+        'nama_tujuan',
+        'tanggal',
+        'keterangan',
     ];
 
-    protected $casts = [
-        'tanggal_keluar' => 'date',
-    ];
+    public function kategori()
+    {
+        return $this->belongsTo(KategoriSampah::class);
+    }
+
+    public function satuan()
+    {
+        return $this->belongsTo(SatuanSampah::class);
+    }
 }

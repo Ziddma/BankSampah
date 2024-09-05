@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class KerajinanMasukController extends Controller
 {
+  
     public function index()
     {
         $kerajinanMasuk = KerajinanMasuk::all();
@@ -23,15 +24,15 @@ class KerajinanMasukController extends Controller
         $request->validate([
             'nama_kerajinan' => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
-            'jumlah' => 'required|integer|min:1',
+            'jumlah' => 'required|integer',
             'pembuat' => 'required|string|max:255',
             'tanggal_masuk' => 'required|date',
         ]);
 
         KerajinanMasuk::create($request->all());
 
-        return redirect()->route('kerajinan-masuk.index')
-            ->with('success', 'Data kerajinan masuk berhasil ditambahkan.');
+        return redirect()->route('kerajinan_masuk.index')
+                         ->with('success', 'Kerajinan masuk berhasil ditambahkan.');
     }
 
     public function show(KerajinanMasuk $kerajinanMasuk)
@@ -41,7 +42,8 @@ class KerajinanMasukController extends Controller
 
     public function edit(KerajinanMasuk $kerajinanMasuk)
     {
-        return view('kerajinan_masuk.edit', compact('kerajinanMasuk'));
+        $kerajinan = $kerajinanMasuk; 
+        return view('kerajinan_masuk.edit', compact('kerajinan'));
     }
 
     public function update(Request $request, KerajinanMasuk $kerajinanMasuk)
@@ -49,22 +51,22 @@ class KerajinanMasukController extends Controller
         $request->validate([
             'nama_kerajinan' => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
-            'jumlah' => 'required|integer|min:1',
+            'jumlah' => 'required|integer',
             'pembuat' => 'required|string|max:255',
             'tanggal_masuk' => 'required|date',
         ]);
 
         $kerajinanMasuk->update($request->all());
 
-        return redirect()->route('kerajinan-masuk.index')
-            ->with('success', 'Data kerajinan masuk berhasil diperbarui.');
+        return redirect()->route('kerajinan_masuk.index')
+                         ->with('success', 'Kerajinan masuk berhasil diupdate.');
     }
 
     public function destroy(KerajinanMasuk $kerajinanMasuk)
     {
         $kerajinanMasuk->delete();
 
-        return redirect()->route('kerajinan-masuk.index')
-            ->with('success', 'Data kerajinan masuk berhasil dihapus.');
+        return redirect()->route('kerajinan_masuk.index')
+                         ->with('success', 'Kerajinan masuk berhasil dihapus.');
     }
 }
