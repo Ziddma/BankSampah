@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SampahMasuk;
 use App\Models\KategoriSampah;
+use App\Models\SatuanSampah;
 use Illuminate\Http\Request;
 
 class SampahMasukController extends Controller
@@ -17,7 +18,8 @@ class SampahMasukController extends Controller
     public function create()
     {
         $kategoriSampah = KategoriSampah::all();
-        return view('sampah_masuk.create', compact('kategoriSampah'));
+        $satuanSampah = SatuanSampah::all();
+        return view('sampah_masuk.create', compact('kategoriSampah', 'satuanSampah'));
     }
 
     public function store(Request $request)
@@ -26,7 +28,7 @@ class SampahMasukController extends Controller
             'nama_siswa.*' => 'required|string|max:255',
             'kategori_id.*' => 'required|integer|exists:kategori_sampah,id',
             'jumlah.*' => 'required|numeric',
-            'satuan.*' => 'required|string',
+            'satuan_id.*' => 'required|string',
             'tanggal.*' => 'required|date',
         ]);
     
@@ -35,7 +37,7 @@ class SampahMasukController extends Controller
                 'nama_siswa' => $nama_siswa,
                 'kategori_id' => $request->kategori_id[$index],
                 'jumlah' => $request->jumlah[$index],
-                'satuan' => $request->satuan[$index],
+                'satuan_id' => $request->satuan_id[$index],
                 'tanggal' => $request->tanggal[$index],
             ]);
         }
@@ -52,7 +54,8 @@ class SampahMasukController extends Controller
     public function edit(SampahMasuk $sampahMasuk)
     {
         $kategoriSampah = KategoriSampah::all();
-        return view('sampah_masuk.edit', compact('sampahMasuk', 'kategoriSampah'));
+        $satuanSampah = SatuanSampah::all();
+        return view('sampah_masuk.edit', compact('sampahMasuk', 'kategoriSampah', 'satuanSampah'));
     }
 
     public function update(Request $request, SampahMasuk $sampahMasuk)
@@ -61,7 +64,7 @@ class SampahMasukController extends Controller
             'nama_siswa' => 'required|string|max:255',
             'kategori_id' => 'required|exists:kategori_sampah,id',
             'jumlah' => 'required|numeric|min:0',
-            'satuan' => 'required|string|max:255',
+            'satuan_id' => 'required|string|max:255|exists:satuan_sampah,id',
             'tanggal' => 'required|date',
         ]);
 

@@ -7,7 +7,7 @@ use App\Http\Controllers\SampahMasukController;
 use App\Http\Controllers\KerajinanKeluarController;
 use App\Http\Controllers\KerajinanMasukController;
 use App\Http\Controllers\SampahKeluarController;
-
+// use App\Http\Controllers\SatuanSampahController;
 
 
 /*
@@ -51,6 +51,8 @@ Route::resource('sampah-masuk', SampahMasukController::class);
 Route::resource('kerajinan-keluar', KerajinanKeluarController::class);
 Route::resource('kerajinan-masuk', KerajinanMasukController::class);
 Route::resource('sampah-keluar', SampahKeluarController::class);
+Route::get('/kategori-sampah/create', [KategoriSampahController::class, 'create'])->name('kategori_sampah.create');
+Route::resource('satuan_sampah', SatuanSampahController::class);
 
 
 

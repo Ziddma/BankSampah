@@ -39,15 +39,12 @@
                         <input type="number" step="0.01" class="form-control" id="jumlah" name="jumlah[]" required>
                     </div>
                     <div class="col-auto">
-                        <label for="satuan">Satuan</label>
-                        <select class="form-control" id="satuan" name="satuan[]" required>
+                        <label for="satuan_id">Satuan</label>
+                        <select class="form-control" id="satuan_id" name="satuan_id[]" required>
                             <option value="">Pilih Satuan</option>
-                            <option value="Kg">Kilogram (kg)</option>
-                            <option value="G">Gram (g)</option>
-                            <option value="lb">Pound (lb)</option>
-                            <option value="M">Meter (m)</option>
-                            <option value="Cm">Centimeter (cm)</option>
-                            <option value="Pcs">Piece (pcs)</option>
+                            @foreach($satuanSampah as $satuan)
+                                <option value="{{ $satuan->id }}">{{ $satuan->satuan }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="col-auto">

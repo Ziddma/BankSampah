@@ -40,15 +40,14 @@
                     <input type="number" step="0.01" class="form-control" id="jumlah" name="jumlah" value="{{ old('jumlah', $sampahMasuk->jumlah) }}" required>
                 </div>
                 <div class="form-group">
-                    <label for="satuan">Satuan</label>
-                    <select class="form-control" id="satuan" name="satuan" required>
+                    <label for="satuan_id">Satuan</label>
+                    <select class="form-control" id="satuan_id" name="satuan_id" required>
                         <option value="">Pilih Satuan</option>
-                        <option value="Kg" {{ old('satuan', $sampahMasuk->satuan) == 'Kg' ? 'selected' : '' }}>Kilogram (kg)</option>
-                        <option value="G" {{ old('satuan', $sampahMasuk->satuan) == 'G' ? 'selected' : '' }}>Gram (g)</option>
-                        <option value="lb" {{ old('satuan', $sampahMasuk->satuan) == 'lb' ? 'selected' : '' }}>Pound (lb)</option>
-                        <option value="M" {{ old('satuan', $sampahMasuk->satuan) == 'M' ? 'selected' : '' }}>Meter (m)</option>
-                        <option value="Cm" {{ old('satuan', $sampahMasuk->satuan) == 'Cm' ? 'selected' : '' }}>Centimeter (cm)</option>
-                        <option value="Pcs" {{ old('satuan', $sampahMasuk->satuan) == 'Pcs' ? 'selected' : '' }}>Piece (pcs)</option>
+                        @foreach($satuanSampah as $satuan)
+                            <option value="{{ $satuan->id }}" {{ old('satuan_id', $sampahMasuk->satuan_id) == $satuan->id ? 'selected' : '' }}>
+                                {{ $satuan->satuan }}
+                            </option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="form-group">

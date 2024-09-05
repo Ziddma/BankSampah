@@ -15,12 +15,17 @@ class SampahMasuk extends Model
         'nama_siswa',
         'kategori_id',
         'jumlah',
-        'satuan',
+        'satuan_id',
         'tanggal',
     ];
 
     public function kategori()
     {
         return $this->belongsTo(KategoriSampah::class);
+    }
+
+    public function satuan()
+    {
+        return $this->belongsTo(SatuanSampah::class);
     }
 }

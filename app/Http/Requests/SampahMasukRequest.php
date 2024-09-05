@@ -17,7 +17,7 @@ class SampahMasukRequest extends FormRequest
             'nama_siswa' => 'required|string|max:255',
             'kategori_id' => 'required|exists:kategori_sampah,id',
             'jumlah' => 'required|numeric|min:0',
-            'satuan' => 'required|string|max:255',
+            'satuan' => 'required|string|max:255|exists:satuan_sampah,id',
         ];
     }
 }

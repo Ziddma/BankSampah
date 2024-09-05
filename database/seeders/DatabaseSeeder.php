@@ -12,12 +12,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $this->call(KategoriSampahSeeder::class);
+        $this->call(SatuanSampahSeeder::class);
 
          \App\Models\User::factory()->create([
              'name' => 'John',
@@ -25,5 +21,15 @@ class DatabaseSeeder extends Seeder
              'password' => 'password',
              'email' => 'test@example.com',
          ]);
+
+         \App\Models\User::factory()->create([
+            'name' => 'Zidni',
+            'last_name' => 'Ilma',
+            'password' => '12345678',
+            'email' => 'uhuy@gmail.com',
+        ]);
+
+        
     }
+ 
 }

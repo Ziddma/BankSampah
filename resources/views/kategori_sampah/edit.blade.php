@@ -34,10 +34,10 @@
                 <label for="kategori">Kategori</label>
                 <input type="text" class="form-control" id="kategori" name="kategori" value="{{ old('kategori', $kategoriSampah->kategori) }}" required>
             </div>
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label for="satuan">Satuan</label>
                 <input type="text" class="form-control" id="satuan" name="satuan" value="{{ old('satuan', $kategoriSampah->satuan) }}" required>
-            </div>
+            </div> --}}
             <div class="form-group">
                 <label for="keterangan">Keterangan</label>
                 <textarea class="form-control" id="keterangan" name="keterangan">{{ old('keterangan', $kategoriSampah->keterangan) }}</textarea>

@@ -68,7 +68,7 @@
                     <!-- Hapus atau komentari baris di bawah ini jika Anda tidak ingin menampilkan header -->
                     <!-- <h6 class="collapse-header">{{ __('Master Data Options') }}</h6> -->
                     <a class="collapse-item {{ Nav::isRoute('kategori_sampah.index') }}" href="{{ route('kategori_sampah.index') }}" style="color: white; transition: color 0.3s;" onmouseover="this.style.color='black'" onmouseout="this.style.color='white'">{{ __('Kategori') }}</a>
-                    <a class="collapse-item {{ Nav::isRoute('kategori_sampah.index') }}" href="{{ route('kategori_sampah.index') }}" style="color: white; transition: color 0.3s;" onmouseover="this.style.color='black'" onmouseout="this.style.color='white'">{{ __('kategori') }}</a>
+                    <a class="collapse-item {{ Nav::isRoute('satuan_sampah.index') }}" href="{{ route('satuan_sampah.index') }}" style="color: white; transition: color 0.3s;" onmouseover="this.style.color='black'" onmouseout="this.style.color='white'">{{ __('Satuan') }}</a>
                 </div>
             </div>
         </li>        

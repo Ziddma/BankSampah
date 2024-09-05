@@ -44,7 +44,7 @@
                             <td>{{ $item->nama_siswa }}</td>
                             <td>{{ $item->kategori->kategori }}</td>
                             <td>{{ $item->jumlah }}</td>
-                            <td>{{ $item->satuan }}</td>
+                            <td>{{ $item->satuan->satuan }}</td>
                             <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d-m-Y') }}</td>
                             <td>
                                 <a href="{{ route('sampah-masuk.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>

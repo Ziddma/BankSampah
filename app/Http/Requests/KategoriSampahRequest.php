@@ -15,7 +15,7 @@ class KategoriSampahRequest extends FormRequest
     {
         return [
             'kategori' => 'required|string|max:255',
-            'satuan' => 'required|string|max:255',
+            // 'satuan' => 'required|string|max:255',
             'keterangan' => 'nullable|string',
         ];
     }

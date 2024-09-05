@@ -15,14 +15,14 @@ class KategoriSampahController extends Controller
 
     public function create()
     {
-        return view('kategori_sampah.create');
+        $kategoriSampah = KategoriSampah::all();
+        return view('kategori_sampah.create', compact('kategoriSampah'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'kategori' => 'required|string|max:255',
-            'satuan' => 'required|string|max:255',
             'keterangan' => 'nullable|string',
         ]);
 
@@ -46,7 +46,6 @@ class KategoriSampahController extends Controller
     {
         $request->validate([
             'kategori' => 'required|string|max:255',
-            'satuan' => 'required|string|max:255',
             'keterangan' => 'nullable|string',
         ]);
 

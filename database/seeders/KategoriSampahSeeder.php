@@ -9,22 +9,26 @@ class KategoriSampahSeeder extends Seeder
 {
     public function run(): void
     {
-        KategoriSampah::create([
+
+        \App\Models\KategoriSampah::create([
             'kategori' => 'Kertas',
-            'satuan' => 'kg',
             'keterangan' => 'Sampah kertas dan kardus',
         ]);
-
-        KategoriSampah::create([
+        \App\Models\KategoriSampah::create([
             'kategori' => 'Plastik',
-            'satuan' => 'kg',
             'keterangan' => 'Sampah plastik berbagai jenis',
         ]);
-        
-        KategoriSampah::create([
+        \App\Models\KategoriSampah::create([
             'kategori' => 'Besi',
-            'satuan' => 'gr',
             'keterangan' => 'Sampah besi bekas sekolah',
+        ]);
+        \App\Models\KategoriSampah::create([
+            'kategori' => 'Kayu',
+            'keterangan' => 'Sampah meja kayu',
+        ]);
+        \App\Models\KategoriSampah::create([
+            'kategori' => 'Organik',
+            'keterangan' => 'Sampah sisa dapur sekolah',
         ]);
 
         // Tambahkan kategori lain sesuai kebutuhan

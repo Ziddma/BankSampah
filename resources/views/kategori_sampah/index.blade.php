@@ -24,7 +24,7 @@
                 <tr>
                     <th>No</th>
                     <th>Kategori</th>
-                    <th>Satuan</th>
+                    {{-- <th>Satuan</th> --}}
                     <th>Keterangan</th>
                     <th>Aksi</th>
                 </tr>
@@ -34,7 +34,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->kategori }}</td>
-                            <td>{{ $item->satuan }}</td>
+                            {{-- <td>{{ $item->satuan }}</td> --}}
                             <td>{{ $item->keterangan }}</td>
                             <td>
                                 <a href="{{ route('kategori_sampah.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
