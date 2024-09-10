@@ -13,6 +13,7 @@ return new class extends Migration
             $table->foreignId('kategori_id')->constrained('kategori_sampah');
             $table->decimal('jumlah', 10, 2);
             $table->foreignId('satuan_id')->constrained('satuan_sampah');
+            $table->foreignId('produk_id')->constrained('produk_sampah');
             $table->string('nama_tujuan');
             $table->date('tanggal');
             $table->text('keterangan')->nullable();

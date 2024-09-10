@@ -32,6 +32,11 @@ class SatuanSampahSeeder extends Seeder
             'keterangan' => '',
         ]);
 
+        \App\Models\SatuanSampah::create([
+            'satuan' => 'Piece (pcs)',
+            'keterangan' => '',
+        ]);
+
         // Tambahkan data lain sesuai kebutuhan
     }
 }

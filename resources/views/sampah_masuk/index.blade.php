@@ -21,7 +21,7 @@
         </div>
     @endif
 
-    <a href="{{ route('sampah-masuk.create') }}" class="btn btn-success mb-3">Tambah Data Sampah Masuk</a>
+    <a href="{{ route('sampah_masuk.create') }}" class="btn btn-success mb-3">Tambah Data Sampah Masuk</a>
 
     <div class="card shadow mb-4">
         <div class="card-body">
@@ -29,11 +29,13 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Nama Siswa</th>
-                        <th>Kategori Sampah</th>
-                        <th>Jumlah</th>
+                        <th>Kode Barang</th>
+                        <th>Nama</th>
+                        <th>Kategori</th>
                         <th>Satuan</th>
-                        <th>Tanggal Input</th>
+                        <th>Produk</th>
+                        <th>Jumlah</th>
+                        <th>Harga Satuan</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -41,14 +43,16 @@
                     @foreach($sampahMasuk as $item)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $item->nama_siswa }}</td>
+                            <td>{{ $item->kode_barang }}</td>
+                            <td>{{ $item->nama }}</td>
                             <td>{{ $item->kategori->kategori }}</td>
-                            <td>{{ $item->jumlah }}</td>
                             <td>{{ $item->satuan->satuan }}</td>
-                            <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d-m-Y') }}</td>
+                            <td>{{ $item->produk->produk }}</td>
+                            <td>{{ number_format($item->jumlah, 0) }}</td>
+                            <td>Rp {{ number_format($item->harga_satuan, 0, ',', '.') }}</td>
                             <td>
-                                <a href="{{ route('sampah-masuk.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                                <form action="{{ route('sampah-masuk.destroy', $item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
+                                <a href="{{ route('sampah_masuk.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                <form action="{{ route('sampah_masuk.destroy', $item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
@@ -59,7 +63,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="3"></td>
+                        <td colspan="9"></td>
                     </tr>
                 </tfoot>
             </table>

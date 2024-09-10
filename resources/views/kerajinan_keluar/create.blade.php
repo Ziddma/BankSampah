@@ -15,73 +15,218 @@
 </div>
 @endif
 
-<form method="POST" action="{{ route('kerajinan_keluar.store') }}">
-    @csrf
-    <div class="card shadow mb-4">
-        <div class="card-body">
-            <div id="dynamicForm">
-                <div class="form-row align-items-center mb-3">
-                    <div class="col-auto">
-                        <label for="nama_tujuan">Nama</label>
-                        <input type="text" class="form-control" id="nama_tujuan" name="nama_tujuan" required>
+
+<div class="container mt-5">
+    <form id="verificationForm" method="POST" action="{{ route('kerajinan_keluar.store') }}">
+        @csrf
+        <div class="row">
+            <!-- Kolom 1 -->
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="kode_barang">Kode Barang</label>
+                    <input type="text" class="form-control" id="kode_barang" required>
+                    <button type="button" class="btn btn-primary mt-2" id="verifyButton">Cek Kode Barang</button>
+                    <div id="verificationResult" class="mt-2"></div>
+                </div>
+                <div id="additionalFields" style="display: none;">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="kategori">Kategori</label>
+                                <input type="text" class="form-control" id="kategori" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="satuan">Satuan</label>
+                                <input type="text" class="form-control" id="satuan" readonly>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-auto">
-                        <label for="kategori_id">Kategori</label>
-                        <select class="form-control" id="kategori_id" name="kategori_id" required>
-                            <option value="">Pilih Kategori</option>
-                            @foreach($kategoriSampah as $kategori)
-                                <option value="{{ $kategori->id }}">{{ $kategori->kategori }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="col-auto">
-                        <label for="jumlah">Jumlah</label>
-                        <input type="number" step="0.01" class="form-control form-control-sm" id="jumlah" name="jumlah" required>
-                    </div>
-                    <div class="col-auto">
-                        <label for="satuan_id">Satuan</label>
-                        <select class="form-control" id="satuan_id" name="satuan_id" required>
-                            <option value="">Pilih Satuan</option>
-                            @foreach($satuanSampah as $satuan)
-                                <option value="{{ $satuan->id }}">{{ $satuan->satuan }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="col-auto">
-                        <label for="tanggal">Tanggal</label>
-                        <input type="date" class="form-control" id="tanggal" name="tanggal" required>
-                    </div>
-                    <div class="col-auto">
-                        <label for="keterangan">Keterangan</label>
-                        <textarea class="form-control" id="keterangan" name="keterangan"></textarea>
-                    </div>
-                    <div class="col-auto mt-4">
-                        <button type="button" class="btn btn-success" onclick="addRow()">Tambah</button>
-                        <button type="button" class="btn btn-danger" onclick="removeRow(this)">Hapus</button>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="produk">Produk</label>
+                                <input type="text" class="form-control" id="produk" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="stok">Stok</label>
+                                <input type="text" class="form-control" id="stok" readonly>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">Tambah Data</button>
-            <a href="{{ route('kerajinan_keluar.index') }}" class="btn btn-secondary">Kembali</a>
+            <!-- Kolom 2 -->
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="input_pemohon">Input Pemohon</label>
+                    <input type="text" class="form-control" id="input_pemohon" required>
+                </div>
+                <div class="form-group">
+                    <label for="tanggal_masuk">Tanggal Masuk</label>
+                    <input type="date" class="form-control" id="tanggal_masuk" required>
+                </div>
+                <div class="form-group">
+                    <label for="jumlah_pengambilan">Jumlah Pengambilan</label>
+                    <input type="number" class="form-control" id="jumlah_pengambilan" required>
+                </div>
+                <div class="form-group">
+                    <label for="keterangan">Keterangan</label>
+                    <textarea class="form-control" id="keterangan" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-success">Submit</button>
+            </div>
         </div>
-    </div>
-</form>
+    </form>
+</div>
+
+
+
+
 
 <script>
-    function addRow() {
-        const formRow = document.querySelector('.form-row').cloneNode(true);
-        formRow.querySelectorAll('input, select').forEach(input => input.value = '');
-        document.getElementById('dynamicForm').appendChild(formRow);
-    }
+    const HOST_URL = "{{ url('/') }}"; // Menggunakan helper Laravel untuk mendapatkan URL dasar
+</script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#verifyButton').on('click', function() {
+            var kodeBarang = $('#kode_barang').val();
+            $.ajax({
+                url: `${HOST_URL}/verify_kode_barang`, // Replace with your actual endpoint
+                type: 'POST',
+                data: { kode_barang: kodeBarang },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                success: function(response) {
+                    if (response.exists) {
+                        $('#verificationResult').html('<span class="text-success">Data ditemukan</span>');
+                        $('#nama').val(response.data.nama);
+                        $('#kategori').val(response.data.kategori);
+                        $('#satuan').val(response.data.satuan);
+                        $('#produk').val(response.data.produk);
+                        $('#stok').val(response.data.stok);
+                        $('#additionalFields').show();
+                    } else {
+                        $('#verificationResult').html('<span class="text-danger">Data tidak ditemukan</span>');
+                        $('#additionalFields').hide();
+                    }
+                },
+                error: function() {
+                    $('#verificationResult').html('<span class="text-danger">Terjadi kesalahan saat memverifikasi</span>');
+                    $('#additionalFields').hide();
+                }
+            });
+        });
 
-    function removeRow(button) {
-        const formRow = button.closest('.form-row');
-        if (document.querySelectorAll('.form-row').length > 1) {
-            formRow.remove();
-        } else {
-            alert('Tidak dapat menghapus semua baris!');
-        }
-    }
+        $('#verificationForm').on('submit', function(e) {
+            e.preventDefault();
+            alert('Form submitted!');
+        });
+    });
 </script>
 
 @endsection
+
+{{-- <form method="POST" action="{{ route('kerajinan_keluar.store') }}">
+    @csrf
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="row">
+                <!-- Column 1: Search Data -->
+                <div class="col-md-6">
+                    <h5>Search Data Sampah Masuk</h5>
+                    <div class="form-group">
+                        <label for="kode_barang">Kode Barang</label>
+                        <input type="text" class="form-control" id="kode_barang" name="kode_barang" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nama">Nama</label>
+                        <input type="text" class="form-control" id="nama" name="nama" readonly>
+                    </div>
+                
+                    <!-- Row for two columns -->
+                    <div class="row">
+                        <!-- Column 1: Kategori and Satuan -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="kategori">Kategori</label>
+                                <input type="text" class="form-control" id="kategori" name="kategori" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="satuan">Satuan</label>
+                                <input type="text" class="form-control" id="satuan" name="satuan" readonly>
+                            </div>
+                        </div>
+                
+                        <!-- Column 2: Produk and Stok -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="produk">Produk</label>
+                                <input type="text" class="form-control" id="produk" name="produk" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="jumlah_masuk">Stok</label>
+                                <input type="number" class="form-control" id="jumlah_masuk" name="jumlah_masuk" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="button" class="btn btn-primary" onclick="checkData()">Cek</button>
+                    <div id="checkResult"></div>
+                </div>
+                
+
+                <!-- Column 2: Input Additional Information -->
+                <div class="col-md-6">
+                    <h5>Tambah Data Kerajinan Keluar</h5>
+                    <div class="form-group">
+                        <label for="nama_tujuan">Nama Tujuan</label>
+                        <input type="text" class="form-control" id="nama_tujuan" name="nama_tujuan" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tanggal">Tanggal Masuk</label>
+                        <input type="date" class="form-control" id="tanggal" name="tanggal" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="jumlah">Jumlah Pengambilan</label>
+                        <input type="number" step="0.01" class="form-control" id="jumlah" name="jumlah" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="keterangan">Keterangan</label>
+                        <textarea class="form-control" id="keterangan" name="keterangan"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="submitBtn" disabled>Tambah Data</button>
+                    <a href="{{ route('kerajinan_keluar.index') }}" class="btn btn-secondary">Kembali</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form> --}}
+
+
+{{-- <script>
+    function checkData() {
+        const kodeBarang = document.getElementById('kode_barang').value;
+
+        // AJAX request to check data
+        fetch(`{{ url('/api/check-sampah-masuk') }}/${kodeBarang}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.found) {
+                    document.getElementById('nama').value = data.nama;
+                    document.getElementById('kategori').value = data.kategori;
+                    document.getElementById('produk').value = data.produk;
+                    document.getElementById('satuan').value = data.satuan;
+                    document.getElementById('jumlah_masuk').value = data.jumlah;
+                    document.getElementById('checkResult').innerText = 'Sampah ditemukan';
+                    document.getElementById('submitBtn').disabled = false;
+                } else {
+                    document.getElementById('checkResult').innerText = 'Sampah tidak ditemukan';
+                    document.getElementById('submitBtn').disabled = true;
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    }
+</script> --}}
+
+

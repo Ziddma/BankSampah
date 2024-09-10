@@ -10,22 +10,39 @@ class SampahMasuk extends Model
     use HasFactory;
 
     protected $table = 'sampah_masuk';
-    
+
     protected $fillable = [
-        'nama_siswa',
+        'kode_barang',
+        'nama',
         'kategori_id',
-        'jumlah',
         'satuan_id',
-        'tanggal',
+        'produk_id',
+        'jumlah',
+        'harga_satuan',
+        
     ];
 
+    /**
+     * Relasi ke tabel kategori_sampah.
+     */
     public function kategori()
     {
-        return $this->belongsTo(KategoriSampah::class);
+        return $this->belongsTo(KategoriSampah::class, 'kategori_id');
     }
 
+    /**
+     * Relasi ke tabel satuan_sampah.
+     */
     public function satuan()
     {
-        return $this->belongsTo(SatuanSampah::class);
+        return $this->belongsTo(SatuanSampah::class, 'satuan_id');
+    }
+
+    /**
+     * Relasi ke tabel produk_sampah.
+     */
+    public function produk()
+    {
+        return $this->belongsTo(ProdukSampah::class, 'produk_id');
     }
 }

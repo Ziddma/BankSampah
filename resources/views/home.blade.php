@@ -92,18 +92,18 @@
     </div>
 
     <!-- Buttons Row -->
-    <div class="row mb-4">
+    {{-- <div class="row mb-4">
         <div class="col-md-6 mb-2">
             <a href="{{ route('kategori_sampah.index') }}" class="btn btn-primary btn-lg w-100">
                 <i class="fas fa-boxes"></i> {{ __('Kategori Sampah') }}
             </a>
-        </div>
-        <div class="col-md-6 mb-2">
-            <a href="{{ route('sampah.index') }}" class="btn btn-secondary btn-lg w-100">
+        </div> --}}
+        {{-- <div class="col-md-6 mb-2">
+            <a href="{{ route('sampah_jual.index') }}" class="btn btn-secondary btn-lg w-100">
                 <i class="fas fa-trash-alt"></i> {{ __('Data Sampah') }}
             </a>
         </div>
-    </div>
+    </div> --}}
 
     {{-- <div class="row mb-4">
         <div class="col-md-6 mb-2">

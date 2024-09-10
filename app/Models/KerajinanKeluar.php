@@ -15,6 +15,7 @@ class KerajinanKeluar extends Model
         'kategori_id',
         'jumlah',
         'satuan_id',
+        'produk_id',
         'nama_tujuan',
         'tanggal',
         'keterangan',
@@ -28,5 +29,10 @@ class KerajinanKeluar extends Model
     public function satuan()
     {
         return $this->belongsTo(SatuanSampah::class);
+    }
+
+    public function produk()
+    {
+        return $this->belongsTo(ProdukSampah::class, 'produk_id');
     }
 }

@@ -15,15 +15,19 @@
 </div>
 @endif
 
-<form method="POST" action="{{ route('sampah-masuk.store') }}">
+<form method="POST" action="{{ route('sampah_masuk.store') }}">
     @csrf
     <div class="card shadow mb-4">
         <div class="card-body">
             <div id="dynamicForm">
                 <div class="form-row align-items-center mb-3">
+                    {{-- <div class="col-auto">
+                        <label for="kode_barang">Kode Barang</label>
+                        <input type="text" class="form-control" id="kode_barang" name="kode_barang[]" required>
+                    </div> --}}
                     <div class="col-auto">
-                        <label for="nama_siswa">Nama Siswa</label>
-                        <input type="text" class="form-control" id="nama_siswa" name="nama_siswa[]" required>
+                        <label for="nama">Nama</label>
+                        <input type="text" class="form-control" id="nama" name="nama[]" required>
                     </div>
                     <div class="col-auto">
                         <label for="kategori_id">Kategori</label>
@@ -35,10 +39,6 @@
                         </select>
                     </div>
                     <div class="col-auto">
-                        <label for="jumlah">Jumlah</label>
-                        <input type="number" step="0.01" class="form-control" id="jumlah" name="jumlah[]" required>
-                    </div>
-                    <div class="col-auto">
                         <label for="satuan_id">Satuan</label>
                         <select class="form-control" id="satuan_id" name="satuan_id[]" required>
                             <option value="">Pilih Satuan</option>
@@ -48,8 +48,21 @@
                         </select>
                     </div>
                     <div class="col-auto">
-                        <label for="tanggal">Tanggal</label>
-                        <input type="date" class="form-control" id="tanggal" name="tanggal[]" required>
+                        <label for="produk_id">Produk</label>
+                        <select class="form-control" id="produk_id" name="produk_id[]" required>
+                            <option value="">Pilih Produk</option>
+                            @foreach($produkSampah as $produk)
+                                <option value="{{ $produk->id }}">{{ $produk->produk }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-auto">
+                        <label for="jumlah">Jumlah</label>
+                        <input type="number" step="0.01" class="form-control" id="jumlah" name="jumlah[]" required>
+                    </div>
+                    <div class="col-auto">
+                        <label for="harga_satuan">Harga Satuan</label>
+                        <input type="text" class="form-control" id="harga_satuan" name="harga_satuan[]" required>
                     </div>
                     <div class="col-auto mt-4">
                         <button type="button" class="btn btn-success" onclick="addRow()">Tambah</button>
@@ -58,7 +71,7 @@
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Tambah Data</button>
-            <a href="{{ route('sampah-masuk.index') }}" class="btn btn-secondary">Kembali</a>
+            <a href="{{ route('sampah_masuk.index') }}" class="btn btn-secondary">Kembali</a>
         </div>
     </div>
 </form>
@@ -78,6 +91,7 @@
             alert('Tidak dapat menghapus semua baris!');
         }
     }
+
 </script>
 
 @endsection

@@ -27,8 +27,8 @@ class KategoriSampahSeeder extends Seeder
             'keterangan' => 'Sampah meja kayu',
         ]);
         \App\Models\KategoriSampah::create([
-            'kategori' => 'Organik',
-            'keterangan' => 'Sampah sisa dapur sekolah',
+            'kategori' => 'Kaca',
+            'keterangan' => 'botol sirup',
         ]);
 
         // Tambahkan kategori lain sesuai kebutuhan

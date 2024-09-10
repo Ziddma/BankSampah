@@ -12,6 +12,7 @@ class KerajinanMasuk extends Model
     protected $table = 'kerajinan_masuk';
 
     protected $fillable = [
+        'kode_barang',
         'nama_kerajinan',
         'deskripsi',
         'jumlah',

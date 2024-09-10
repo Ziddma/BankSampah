@@ -11,6 +11,7 @@ return new class extends Migration
         Schema::create('kerajinan_masuk', function (Blueprint $table) {
             $table->id();
             $table->string('nama_kerajinan');
+            $table->string('kode_barang')->unique();
             $table->text('deskripsi')->nullable();
             $table->integer('jumlah');
             $table->string('pembuat');

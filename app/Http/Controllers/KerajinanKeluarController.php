@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\KerajinanKeluar;
 use App\Models\KategoriSampah;
 use App\Models\SatuanSampah;
+use App\Models\ProdukSampah;
+use App\Models\SampahMasuk;
 use Illuminate\Http\Request;
 
 class KerajinanKeluarController extends Controller
@@ -19,26 +21,63 @@ class KerajinanKeluarController extends Controller
     {
         $kategoriSampah = KategoriSampah::all();
         $satuanSampah = SatuanSampah::all();
+        $produkSampah = ProdukSampah::all();
 
-        return view('kerajinan_keluar.create', compact('kategoriSampah', 'satuanSampah'));
+        return view('kerajinan_keluar.create', compact('kategoriSampah', 'satuanSampah', 'produkSampah'));
     }
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'kategori_id' => 'required|exists:kategori_sampah,id',
-            'jumlah' => 'required|numeric|min:0',
             'satuan_id' => 'required|exists:satuan_sampah,id',
+            'produk_id' => 'required|exists:produk_sampah,id',
             'nama_tujuan' => 'required|string|max:255',
             'tanggal' => 'required|date',
+            'jumlah_out' => 'required|numeric',
             'keterangan' => 'nullable|string',
         ]);
-
-        KerajinanKeluar::create($request->all());
-
-        return redirect()->route('kerajinan_keluar.index')
-            ->with('success', 'Data kerajinan keluar berhasil ditambahkan.');
+    
+        $kerajinanKeluar = new KerajinanKeluar();
+        $kerajinanKeluar->kategori_id = $validatedData['kategori_id'];
+        $kerajinanKeluar->satuan_id = $validatedData['satuan_id'];
+        $kerajinanKeluar->produk_id = $validatedData['produk_id'];
+        $kerajinanKeluar->nama_tujuan = $validatedData['nama_tujuan'];
+        $kerajinanKeluar->tanggal = $validatedData['tanggal'];
+        $kerajinanKeluar->jumlah = $validatedData['jumlah_out'];
+        $kerajinanKeluar->keterangan = $validatedData['keterangan'];
+        $kerajinanKeluar->save();
+    
+        return response()->json(['success' => true]);
     }
+    
+
+    
+    public function verifyKodeBarang(Request $request)
+    {
+        $request->validate([
+            'kode_barang' => 'required|string'
+        ]);
+    
+        $barang = \App\Models\SampahMasuk::where('kode_barang', $request->kode_barang)->first();
+    
+        if ($barang) {
+            return response()->json([
+                'exists' => true,
+                'data' => [
+                    'nama' => $barang->nama,
+                    'kategori' => $barang->kategori_id,
+                    'satuan' => $barang->satuan_id,
+                    'produk' => $barang->produk_id,
+                    'stok' => $barang->jumlah,
+                ]
+            ]);
+        } else {
+            return response()->json(['exists' => false]);
+        }
+    }
+    
+    
 
     public function show(KerajinanKeluar $kerajinanKeluar)
     {

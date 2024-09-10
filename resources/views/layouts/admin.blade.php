@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Bank Sampah">
     <meta name="author" content="Alejandro RH">
+    
+
+    
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -69,12 +72,13 @@
                     <!-- <h6 class="collapse-header">{{ __('Master Data Options') }}</h6> -->
                     <a class="collapse-item {{ Nav::isRoute('kategori_sampah.index') }}" href="{{ route('kategori_sampah.index') }}" style="color: white; transition: color 0.3s;" onmouseover="this.style.color='black'" onmouseout="this.style.color='white'">{{ __('Kategori') }}</a>
                     <a class="collapse-item {{ Nav::isRoute('satuan_sampah.index') }}" href="{{ route('satuan_sampah.index') }}" style="color: white; transition: color 0.3s;" onmouseover="this.style.color='black'" onmouseout="this.style.color='white'">{{ __('Satuan') }}</a>
+                    <a class="collapse-item {{ Nav::isRoute('produk_sampah.index') }}" href="{{ route('produk_sampah.index') }}" style="color: white; transition: color 0.3s;" onmouseover="this.style.color='black'" onmouseout="this.style.color='white'">{{ __('Produk') }}</a>
                 </div>
             </div>
         </li>        
 
-        <li class="nav-item {{ Nav::isRoute('sampah.index') }}">
-            <a class="nav-link" href="{{ route('sampah.index') }}">
+        <li class="nav-item {{ Nav::isRoute('sampah_masuk.index') }}">
+            <a class="nav-link" href="{{ route('sampah_masuk.index') }}">
             <i class="fas fa-trash-alt"></i>
             <span>{{ __('Data Sampah') }}</span>
         </a>
@@ -94,17 +98,24 @@
                 </div>
             </div>
         </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDataPenjualan" aria-expanded="true" aria-controls="collapseDataPenjualan">
+                <i class="fas fa-money-bills"></i>
+                <span>{{ __('Data Penjualan') }}</span>
+            </a>
+            <div id="collapseDataPenjualan" class="collapse" aria-labelledby="headingDataPenjualan" data-parent="#accordionSidebar">
+                <div class="py-2 collapse-inner rounded" style="background-color: transparent;">
+                    <a class="collapse-item {{ Nav::isRoute('kerajinan_jual.index') }}" href="{{ route('kerajinan_jual.index') }}" style="color: white; transition: color 0.3s;" onmouseover="this.style.color='black'" onmouseout="this.style.color='white'">{{ __('Kerajinan') }}</a>
+                    <a class="collapse-item {{ Nav::isRoute('sampah_jual.index') }}" href="{{ route('sampah_jual.index') }}" style="color: white; transition: color 0.3s;" onmouseover="this.style.color='black'" onmouseout="this.style.color='white'">{{ __('Sampah Umum') }}</a>
+                </div>
+            </div>
+        </li>
+        
           
 
-        {{-- <li class="nav-item {{ Nav::isRoute('kerajinan.index') }}">
-            <a class="nav-link" href="{{ route('kerajinan.index') }}">
-                <i class="fas fa-recycle"></i>
-            <span>{{ __('Kerajinan') }}</span>
-        </a>
-        </li> --}}
-
-        {{-- <li class="nav-item {{ Nav::isRoute('penjualan.index') }}">
-            <a class="nav-link" href="{{ route('penjualan.index') }}">
+        {{-- <li class="nav-item {{ Nav::isRoute('sampah_jual.index') }}">
+            <a class="nav-link" href="{{ route('sampah_jual.index') }}">
                 <i class="fas fa-fw fa-money-bills"></i>
             <span>{{ __('Data Penjualan') }}</span>
             </a>
@@ -393,5 +404,6 @@
 <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
 <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
+
 </body>
 </html>

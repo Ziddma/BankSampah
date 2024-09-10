@@ -29,6 +29,7 @@
                 <thead>
                     <tr>
                         <th>No</th>
+                        <th>Kode Kerajinan</th>
                         <th>Nama Kerajinan</th>
                         <th>Deskripsi</th>
                         <th>Jumlah</th>
@@ -41,6 +42,7 @@
                     @foreach($kerajinanMasuk as $item)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
+                            <td>{{ $item->kode_barang }}</td>
                             <td>{{ $item->nama_kerajinan }}</td>
                             <td>{{ $item->deskripsi ?? 'N/A' }}</td>
                             <td>{{ $item->jumlah }}</td>

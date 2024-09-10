@@ -15,7 +15,7 @@
     </div>
     @endif
 
-    <form method="POST" action="{{ route('sampah-masuk.update', $sampahMasuk->id) }}">
+    <form method="POST" action="{{ route('sampah_masuk.update', $sampahMasuk->id) }}">
         @csrf
         @method('PUT')
         <div class="card shadow mb-4">
@@ -55,7 +55,7 @@
                     <input type="date" class="form-control" id="tanggal" name="tanggal" value="{{ old('tanggal', $sampahMasuk->tanggal) }}" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Update Data</button>
-                <a href="{{ route('sampah-masuk.index') }}" class="btn btn-secondary">Kembali</a>
+                <a href="{{ route('sampah_masuk.index') }}" class="btn btn-secondary">Kembali</a>
             </div>
         </div>
     </form>

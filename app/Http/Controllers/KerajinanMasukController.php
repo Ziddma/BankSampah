@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\KerajinanMasuk;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class KerajinanMasukController extends Controller
 {
@@ -22,6 +23,7 @@ class KerajinanMasukController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'kode_barang' => 'KRJ-' . Str::upper(Str::random(8)),
             'nama_kerajinan' => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
             'jumlah' => 'required|integer',

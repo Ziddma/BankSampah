@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(KategoriSampahSeeder::class);
         $this->call(SatuanSampahSeeder::class);
-
+        $this->call(ProdukSampahSeeder::class);
          \App\Models\User::factory()->create([
              'name' => 'John',
              'last_name' => 'Doe',

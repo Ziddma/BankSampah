@@ -6,8 +6,8 @@ use App\Http\Controllers\KategoriSampahController;
 use App\Http\Controllers\SampahMasukController;
 use App\Http\Controllers\KerajinanKeluarController;
 use App\Http\Controllers\KerajinanMasukController;
-use App\Http\Controllers\SampahKeluarController;
 use App\Http\Controllers\SatuanSampahController;
+use App\Http\Controllers\ProdukSampahController;
 
 
 
@@ -43,20 +43,26 @@ Route::get('/sampah', 'SampahMasukController@index')->name('sampah-masuk.index')
 // Route::put('/sampah/{id}', 'SampahController@update')->name('sampah.update');
 
 
-Route::resource('sampah', 'SampahMasukController');
+Route::resource('sampah_masuk', 'SampahMasukController');
+Route::resource('sampah_jual', 'SampahJualController');
+Route::resource('kerajinan_jual', 'KerajinanJualController');
 
 
 
 //Route Baru Zidni
 Route::resource('kategori_sampah', KategoriSampahController::class);
-Route::resource('sampah-masuk', SampahMasukController::class);
+Route::resource('produk_sampah', ProdukSampahController::class);
 Route::resource('kerajinan_keluar', KerajinanKeluarController::class);
 Route::resource('kerajinan_masuk', KerajinanMasukController::class);
-Route::resource('sampah-keluar', SampahKeluarController::class);
 Route::get('/kategori-sampah/create', [KategoriSampahController::class, 'create'])->name('kategori_sampah.create');
 Route::resource('satuan_sampah', SatuanSampahController::class);
 
+Route::get('/api/check-sampah-masuk/{kodeBarang}', [KerajinanKeluarController::class, 'checkSampahMasuk']);
 
+Route::post('/check-sampah-masuk', [KerajinanKeluarController::class, 'checkSampahMasuk']);
+
+Route::post('/verify_kode_barang', [KerajinanKeluarController::class, 'verifyKodeBarang']);
+Route::post('/kerajinan_keluar/store', [KerajinanKeluarController::class, 'store']);
 
 
 
