@@ -13,11 +13,15 @@ return new class extends Migration
     {
         Schema::create('sampah_jual', function (Blueprint $table) {
             $table->id();
-            $table->string('tujuan_jual');
+            $table->string('kode_penjualan')->unique();
+            $table->string('kode_barang');
+            $table->string('nama_pembeli');
             $table->foreignId('kategori_id')->constrained('kategori_sampah');
-            $table->integer('jumlah'); 
             $table->foreignId('satuan_id')->constrained('satuan_sampah');
+            $table->foreignId('produk_id')->constrained('produk_sampah');
+            $table->integer('jumlah'); 
             $table->decimal('harga', 10, 2)->nullable();
+            $table->decimal('harga_total', 10, 2);
             $table->date('tanggal');
             $table->timestamps();
         });

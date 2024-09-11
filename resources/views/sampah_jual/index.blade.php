@@ -29,12 +29,13 @@
                 <thead>
                     <tr>
                         <th>ID Penjualan</th>
-                        <th>Nama Barang</th>
-                        <th>Kategori Barang</th>
-                        <th>Jumlah</th>
+                        <th>ID Sampah</th>
+                        <th>Nama Pembeli</th>
+                        <th>Kategori</th>
+                        <th>Produk</th>
                         <th>Satuan</th>
-                        <th>Tanggal Penjualan</th>
-                        <th>Harga</th>
+                        <th>Jumlah</th>
+                        {{-- <th>Tanggal Penjualan</th> --}}
                         <th>Total Harga</th>
                         <th>Aksi</th>
                     </tr>
@@ -42,14 +43,16 @@
                 <tbody>
                     @foreach($sampahJual as $item)
                         <tr>
-                            <td>{{ $item->id }}</td> <!-- Changed from idPenjualan to id -->
-                            <td>{{ $item->namaBarang }}</td>
-                            <td>{{ $item->kategoriBarang }}</td>
+                            <td>{{ $item->kode_penjualan }}</td> <!-- Changed from idPenjualan to id -->
+                            <td>{{ $item->kode_barang }}</td>
+                            <td>{{ $item->nama_pembeli }}</td>
+                            <td>{{ $item->kategori->kategori }}</td>
+                            <td>{{ $item->produk->produk }}</td>
+                            <td>{{ $item->satuan->satuan }}</td>
                             <td>{{ $item->jumlah }}</td>
-                            <td>{{ $item->satuan }}</td>
-                            <td>{{ $item->tglPenjualan->format('d-m-Y') }}</td> <!-- Using Carbon for date formatting -->
-                            <td>{{ number_format($item->harga, 0, ',', '.') }}</td>
-                            <td>{{ number_format($item->totalHarga, 0, ',', '.') }}</td>
+                            {{-- <td>{{ $item->tglPenjualan->format('d-m-Y') }}</td> <!-- Using Carbon for date formatting -->
+                            <td>{{ number_format($item->harga, 0, ',', '.') }}</td> --}}
+                            <td>Rp {{ number_format($item->harga_total, 0, ',', '.') }}</td>
                             <td>
                                 <a href="{{ route('sampah_jual.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
                                 <!-- Tombol Hapus -->

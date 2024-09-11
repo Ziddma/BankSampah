@@ -9,29 +9,23 @@ class SampahJual extends Model
 {
     use HasFactory;
 
-    /**
-     * Nama tabel yang terhubung dengan model ini.
-     *
-     * @var string
-     */
     protected $table = 'sampah_jual';
 
-    /**
-     * Atribut yang dapat diisi secara massal.
-     *
-     * @var array
-     */
     protected $fillable = [
-        'tujuan_jual',
+        'kode_penjualan',
+        'kode_barang',
+        'nama_pembeli',
         'kategori_id',
-        'jumlah',
         'satuan_id',
+        'produk_id',
+        'jumlah',
         'harga',
+        'harga_total',
         'tanggal',
     ];
 
     /**
-     * Mendefinisikan relasi dengan model KategoriSampah.
+     * Get the category associated with the sale.
      */
     public function kategori()
     {
@@ -39,18 +33,18 @@ class SampahJual extends Model
     }
 
     /**
-     * Mendefinisikan relasi dengan model KerajinanMasuk.
-     */
-    public function kerajinan()
-    {
-        return $this->belongsTo(KerajinanMasuk::class, 'kerajinan_id');
-    }
-
-    /**
-     * Mendefinisikan relasi dengan model SatuanSampah.
+     * Get the unit associated with the sale.
      */
     public function satuan()
     {
         return $this->belongsTo(SatuanSampah::class, 'satuan_id');
+    }
+
+    /**
+     * Get the product associated with the sale.
+     */
+    public function produk()
+    {
+        return $this->belongsTo(ProdukSampah::class, 'produk_id');
     }
 }
