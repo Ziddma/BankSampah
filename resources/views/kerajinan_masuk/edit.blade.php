@@ -24,6 +24,10 @@
         <input type="text" id="nama_kerajinan" name="nama_kerajinan" class="form-control" value="{{ old('nama_kerajinan', $kerajinan->nama_kerajinan) }}" required>
     </div>
     <div class="form-group">
+        <label for="pembuat">Nama Pembuat</label>
+        <input type="text" id="pembuat" name="pembuat" class="form-control" value="{{ old('pembuat', $kerajinan->pembuat) }}" required>
+    </div>
+    <div class="form-group">
         <label for="deskripsi">Deskripsi</label>
         <textarea id="deskripsi" name="deskripsi" class="form-control">{{ old('deskripsi', $kerajinan->deskripsi) }}</textarea>
     </div>
@@ -32,13 +36,13 @@
         <input type="number" id="jumlah" name="jumlah" class="form-control" value="{{ old('jumlah', $kerajinan->jumlah) }}" required>
     </div>
     <div class="form-group">
-        <label for="pembuat">Pembuat</label>
-        <input type="text" id="pembuat" name="pembuat" class="form-control" value="{{ old('pembuat', $kerajinan->pembuat) }}" required>
+        <label for="harga_satuan">Harga Satuan</label>
+        <input type="number" step="0.01" class="form-control" id="harga_satuan" name="harga_satuan" value="{{ old('harga_satuan', $kerajinan->harga_satuan) }}" required>
     </div>
-    <div class="form-group">
+    {{-- <div class="form-group">
         <label for="tanggal_masuk">Tanggal Masuk</label>
         <input type="date" id="tanggal_masuk" name="tanggal_masuk" class="form-control" value="{{ $kerajinan->tanggal_masuk }}" required>
-    </div>
+    </div> --}}
     <button type="submit" class="btn btn-primary">Update</button>
 </form>
 
