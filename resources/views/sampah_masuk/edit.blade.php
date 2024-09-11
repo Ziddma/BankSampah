@@ -21,8 +21,8 @@
         <div class="card shadow mb-4">
             <div class="card-body">
                 <div class="form-group">
-                    <label for="nama_siswa">Nama Siswa</label>
-                    <input type="text" class="form-control" id="nama_siswa" name="nama_siswa" value="{{ old('nama_siswa', $sampahMasuk->nama_siswa) }}" required>
+                    <label for="nama">Nama Siswa</label>
+                    <input type="text" class="form-control" id="nama" name="nama" value="{{ old('nama', $sampahMasuk->nama) }}" required>
                 </div>
                 <div class="form-group">
                     <label for="kategori_id">Kategori</label>
@@ -36,10 +36,6 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="jumlah">Jumlah</label>
-                    <input type="number" step="0.01" class="form-control" id="jumlah" name="jumlah" value="{{ old('jumlah', $sampahMasuk->jumlah) }}" required>
-                </div>
-                <div class="form-group">
                     <label for="satuan_id">Satuan</label>
                     <select class="form-control" id="satuan_id" name="satuan_id" required>
                         <option value="">Pilih Satuan</option>
@@ -51,9 +47,29 @@
                     </select>
                 </div>
                 <div class="form-group">
+                    <label for="produk_id">Produk</label>
+                    <select class="form-control" id="produk_id" name="produk_id" required>
+                        <option value="">Pilih Produk</option>
+                        @foreach($produkSampah as $produk)
+                            <option value="{{ $produk->id }}" {{ old('produk_id', $sampahMasuk->produk_id) == $produk->id ? 'selected' : '' }}>
+                                {{ $produk->produk }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="jumlah">Jumlah</label>
+                    <input type="number" step="0.01" class="form-control" id="jumlah" name="jumlah" value="{{ old('jumlah', $sampahMasuk->jumlah) }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="harga_satuan">Harga Satuan</label>
+                    <input type="number" step="0.01" class="form-control" id="harga_satuan" name="harga_satuan" value="{{ old('harga_satuan', $sampahMasuk->harga_satuan) }}" required>
+                </div>
+
+                {{-- <div class="form-group">
                     <label for="tanggal">Tanggal</label>
                     <input type="date" class="form-control" id="tanggal" name="tanggal" value="{{ old('tanggal', $sampahMasuk->tanggal) }}" required>
-                </div>
+                </div> --}}
                 <button type="submit" class="btn btn-primary">Update Data</button>
                 <a href="{{ route('sampah_masuk.index') }}" class="btn btn-secondary">Kembali</a>
             </div>

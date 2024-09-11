@@ -64,6 +64,7 @@ class SampahMasukController extends Controller
     {
         $kategoriSampah = KategoriSampah::all();
         $satuanSampah = SatuanSampah::all();
+        $produkSampah = ProdukSampah::all();
         return view('sampah_masuk.edit', compact('sampahMasuk', 'kategoriSampah', 'satuanSampah', 'produkSampah'));
     }
 
@@ -71,9 +72,9 @@ class SampahMasukController extends Controller
 {
     $request->validate([
         'nama' => 'required|string|max:255',
-        'kategori_id' => 'required|exists:kategori_sampah,id',
-        'satuan_id' => 'required|exists:satuan_sampah,id',
-        'produk_id' => 'required|exists:produk_sampah,id',
+        'kategori_id' => 'required|integer|exists:kategori_sampah,id',
+        'satuan_id' => 'required|integer|exists:satuan_sampah,id',
+        'produk_id' => 'required|integer|exists:produk_sampah,id',
         'jumlah' => 'required|numeric|min:0',
         'harga_satuan' => 'required|numeric|min:0',
         
