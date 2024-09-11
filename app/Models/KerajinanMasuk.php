@@ -17,6 +17,6 @@ class KerajinanMasuk extends Model
         'deskripsi',
         'jumlah',
         'pembuat',
-        'tanggal_masuk',
+        'harga_satuan'
     ];
 }

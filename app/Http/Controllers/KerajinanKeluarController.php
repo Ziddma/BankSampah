@@ -22,34 +22,43 @@ class KerajinanKeluarController extends Controller
         $kategoriSampah = KategoriSampah::all();
         $satuanSampah = SatuanSampah::all();
         $produkSampah = ProdukSampah::all();
-
-        return view('kerajinan_keluar.create', compact('kategoriSampah', 'satuanSampah', 'produkSampah'));
+    
+        // Assuming you want to pass the first item from each collection
+        $kategori = $kategoriSampah->first();
+        $satuan = $satuanSampah->first();
+        $produk = $produkSampah->first();
+    
+        return view('kerajinan_keluar.create', compact('kategori', 'satuan', 'produk', 'kategoriSampah', 'satuanSampah', 'produkSampah'));
     }
+    
 
     public function store(Request $request)
     {
+        // dd($request->all()); // Check the received data
+    
+        // Validate the incoming request data
         $validatedData = $request->validate([
             'kategori_id' => 'required|exists:kategori_sampah,id',
+            'jumlah' => 'required|numeric|min:0',
             'satuan_id' => 'required|exists:satuan_sampah,id',
             'produk_id' => 'required|exists:produk_sampah,id',
             'nama_tujuan' => 'required|string|max:255',
             'tanggal' => 'required|date',
-            'jumlah_out' => 'required|numeric',
             'keterangan' => 'nullable|string',
         ]);
     
+        // Create a new KerajinanKeluar instance and fill it with the validated data
         $kerajinanKeluar = new KerajinanKeluar();
-        $kerajinanKeluar->kategori_id = $validatedData['kategori_id'];
-        $kerajinanKeluar->satuan_id = $validatedData['satuan_id'];
-        $kerajinanKeluar->produk_id = $validatedData['produk_id'];
-        $kerajinanKeluar->nama_tujuan = $validatedData['nama_tujuan'];
-        $kerajinanKeluar->tanggal = $validatedData['tanggal'];
-        $kerajinanKeluar->jumlah = $validatedData['jumlah_out'];
-        $kerajinanKeluar->keterangan = $validatedData['keterangan'];
+        $kerajinanKeluar->fill($validatedData);
+        
+        // Save the instance to the database
         $kerajinanKeluar->save();
     
-        return response()->json(['success' => true]);
+        // Return a response or redirect as needed
+        return redirect()->route('kerajinan_keluar.index')
+            ->with('success', 'Data kerajinan keluar berhasil disimpan.');
     }
+    
     
 
     
@@ -65,7 +74,7 @@ class KerajinanKeluarController extends Controller
             return response()->json([
                 'exists' => true,
                 'data' => [
-                    'nama' => $barang->nama,
+                    // 'nama' => $barang->nama,
                     'kategori' => $barang->kategori_id,
                     'satuan' => $barang->satuan_id,
                     'produk' => $barang->produk_id,

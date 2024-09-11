@@ -15,7 +15,8 @@ return new class extends Migration
             $table->text('deskripsi')->nullable();
             $table->integer('jumlah');
             $table->string('pembuat');
-            $table->date('tanggal_masuk');
+            $table->decimal('harga_satuan', 10, 2)->unsigned();
+            $table->date('tanggal_masuk')->nullable();
             $table->timestamps();
         });
     }

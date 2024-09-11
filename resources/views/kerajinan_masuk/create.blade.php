@@ -23,24 +23,28 @@
                 <div class="form-row align-items-center mb-3">
                     <div class="col-auto">
                         <label for="nama_kerajinan">Nama Kerajinan</label>
-                        <input type="text" class="form-control" id="nama_kerajinan" name="nama_kerajinan" required>
+                        <input type="text" class="form-control" id="nama_kerajinan" name="nama_kerajinan[]" required>
                     </div>
                     <div class="col-auto">
-                        <label for="jumlah">Jumlah</label>
-                        <input type="number" step="0.01" class="form-control form-control-sm" id="jumlah" name="jumlah" required>
-                    </div>
-                    <div class="col-auto">
-                        <label for="pembuat">Pembuat</label>
-                        <input type="text" class="form-control" id="pembuat" name="pembuat" required>
+                        <label for="pembuat">Nama Pembuat</label>
+                        <input type="text" class="form-control" id="pembuat" name="pembuat[]" required>
                     </div>
                     <div class="col-auto">
                         <label for="deskripsi">Deskripsi</label>
-                        <textarea class="form-control" id="deskripsi" name="deskripsi"></textarea>
+                        <textarea class="form-control" id="deskripsi" name="deskripsi[]"></textarea>
                     </div>
                     <div class="col-auto">
+                        <label for="jumlah">Jumlah</label>
+                        <input type="number" step="0.01" class="form-control form-control-sm" id="jumlah" name="jumlah[]" required>
+                    </div>
+                    <div class="col-auto">
+                        <label for="harga_satuan">Harga Satuan</label>
+                        <input type="text" class="form-control" id="harga_satuan" name="harga_satuan[]" required>
+                    </div>
+                    {{-- <div class="col-auto">
                         <label for="tanggal_masuk">Tanggal Masuk</label>
                         <input type="date" class="form-control" id="tanggal_masuk" name="tanggal_masuk" required>
-                    </div>
+                    </div> --}}
                     <div class="col-auto mt-4">
                         <button type="button" class="btn btn-success" onclick="addRow()">Tambah</button>
                         <button type="button" class="btn btn-danger" onclick="removeRow(this)">Hapus</button>

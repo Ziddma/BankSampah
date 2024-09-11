@@ -15,7 +15,6 @@
 </div>
 @endif
 
-
 <div class="container mt-5">
     <form id="verificationForm" method="POST" action="{{ route('kerajinan_keluar.store') }}">
         @csrf
@@ -24,7 +23,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="kode_barang">Kode Barang</label>
-                    <input type="text" class="form-control" id="kode_barang" required>
+                    <input type="text" class="form-control" id="kode_barang" name="kode_barang" required>
                     <button type="button" class="btn btn-primary mt-2" id="verifyButton">Cek Kode Barang</button>
                     <div id="verificationResult" class="mt-2"></div>
                 </div>
@@ -33,11 +32,11 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <label for="kategori">Kategori</label>
-                                <input type="text" class="form-control" id="kategori" readonly>
+                                <input type="text" class="form-control" id="kategori" name="kategori_id" value="{{ $kategori->kategori ?? '' }}" readonly>
                             </div>
                             <div class="col-md-6">
                                 <label for="satuan">Satuan</label>
-                                <input type="text" class="form-control" id="satuan" readonly>
+                                <input type="text" class="form-control" id="satuan" name="satuan_id" value="{{ $satuan->satuan ?? '' }}" readonly>
                             </div>
                         </div>
                     </div>
@@ -45,43 +44,40 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <label for="produk">Produk</label>
-                                <input type="text" class="form-control" id="produk" readonly>
+                                <input type="text" class="form-control" id="produk" name="produk_id" value="{{ $produk->produk ?? '' }}" readonly>
                             </div>
                             <div class="col-md-6">
                                 <label for="stok">Stok</label>
-                                <input type="text" class="form-control" id="stok" readonly>
+                                <input type="text" class="form-control" id="stok" name="stok" readonly>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            
             <!-- Kolom 2 -->
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="input_pemohon">Input Pemohon</label>
-                    <input type="text" class="form-control" id="input_pemohon" required>
+                    <input type="text" class="form-control" id="input_pemohon" name="nama_tujuan" required>
                 </div>
                 <div class="form-group">
                     <label for="tanggal_masuk">Tanggal Masuk</label>
-                    <input type="date" class="form-control" id="tanggal_masuk" required>
+                    <input type="date" class="form-control" id="tanggal_masuk" name="tanggal" required>
                 </div>
                 <div class="form-group">
                     <label for="jumlah_pengambilan">Jumlah Pengambilan</label>
-                    <input type="number" class="form-control" id="jumlah_pengambilan" required>
+                    <input type="number" class="form-control" id="jumlah_pengambilan" name="jumlah" required>
                 </div>
                 <div class="form-group">
                     <label for="keterangan">Keterangan</label>
-                    <textarea class="form-control" id="keterangan" required></textarea>
+                    <textarea class="form-control" id="keterangan" name="keterangan" required></textarea>
                 </div>
                 <button type="submit" class="btn btn-success">Submit</button>
             </div>
         </div>
     </form>
 </div>
-
-
-
-
 
 <script>
     const HOST_URL = "{{ url('/') }}"; // Menggunakan helper Laravel untuk mendapatkan URL dasar
@@ -100,7 +96,6 @@
                 success: function(response) {
                     if (response.exists) {
                         $('#verificationResult').html('<span class="text-success">Data ditemukan</span>');
-                        $('#nama').val(response.data.nama);
                         $('#kategori').val(response.data.kategori);
                         $('#satuan').val(response.data.satuan);
                         $('#produk').val(response.data.produk);
@@ -117,13 +112,9 @@
                 }
             });
         });
-
-        $('#verificationForm').on('submit', function(e) {
-            e.preventDefault();
-            alert('Form submitted!');
-        });
     });
 </script>
+
 
 @endsection
 

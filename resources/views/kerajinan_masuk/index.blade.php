@@ -29,12 +29,12 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Kode Kerajinan</th>
+                        <th>Kode Barang</th>
                         <th>Nama Kerajinan</th>
+                        <th>Nama Pembuat</th>
                         <th>Deskripsi</th>
                         <th>Jumlah</th>
-                        <th>Pembuat</th>
-                        <th>Tanggal Masuk</th>
+                        <th>Harga Satuan</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -44,10 +44,11 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->kode_barang }}</td>
                             <td>{{ $item->nama_kerajinan }}</td>
-                            <td>{{ $item->deskripsi ?? 'N/A' }}</td>
-                            <td>{{ $item->jumlah }}</td>
                             <td>{{ $item->pembuat }}</td>
-                            <td>{{ $item->tanggal_masuk }}</td>
+                            <td>{{ $item->deskripsi ?? 'N/A' }}</td>
+                            <td>{{ number_format($item->jumlah, 0) }}</td>
+                            <td>Rp {{ number_format($item->harga_satuan, 0, ',', '.') }}</td>
+                            {{-- <td>{{ $item->tanggal_masuk }}</td> --}}
                             <td>
                                 <a href="{{ route('kerajinan_masuk.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
 

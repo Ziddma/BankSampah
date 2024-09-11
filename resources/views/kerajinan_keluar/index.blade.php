@@ -44,11 +44,12 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Nama</th>
+                        <th>Nama Pemohon</th>
+                        <th>Produk</th>
                         <th>Kategori</th>
                         <th>Jumlah</th>
                         <th>Satuan</th>
-                        <th>Tanggal</th>
+                        {{-- <th>Tanggal</th> --}}
                         <th>Keterangan</th>
                         <th>Aksi</th>
                     </tr>
@@ -58,10 +59,11 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->nama_tujuan }}</td>
+                            <td>{{ $item->produk->produk }}</td>
                             <td>{{ $item->kategori->kategori ?? 'N/A' }}</td>
-                            <td>{{ $item->jumlah }}</td>
+                            <td>{{ number_format($item->jumlah, 0) }}</td>
                             <td>{{ $item->satuan->satuan ?? 'N/A' }}</td>
-                            <td>{{ $item->tanggal }}</td>
+                            {{-- <td>{{ $item->tanggal }}</td> --}}
                             <td>{{ $item->keterangan }}</td>
                             <td>
                                 <a href="{{ route('kerajinan_keluar.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>

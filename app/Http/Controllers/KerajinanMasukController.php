@@ -19,23 +19,35 @@ class KerajinanMasukController extends Controller
     {
         return view('kerajinan_masuk.create');
     }
-
     public function store(Request $request)
     {
+        // Validate the incoming request data
         $request->validate([
-            'kode_barang' => 'KRJ-' . Str::upper(Str::random(8)),
-            'nama_kerajinan' => 'required|string|max:255',
-            'deskripsi' => 'nullable|string',
-            'jumlah' => 'required|integer',
-            'pembuat' => 'required|string|max:255',
-            'tanggal_masuk' => 'required|date',
+            'kode_barang.*' => 'nullable|string', // kode_barang will be generated, so validation here is optional
+            'nama_kerajinan.*' => 'required|string|max:255',
+            'deskripsi.*' => 'nullable|string',
+            'jumlah.*' => 'required|integer',
+            'pembuat.*' => 'required|string|max:255',
+            'harga_satuan.*' => 'required|numeric|min:0',
         ]);
-
-        KerajinanMasuk::create($request->all());
-
+    
+        // Loop through each 'nama_kerajinan' entry to create a new record
+        foreach ($request->nama_kerajinan as $index => $nama_kerajinan) {
+            KerajinanMasuk::create([
+                'kode_barang' => 'KRJ-' . Str::upper(Str::random(8)),
+                'nama_kerajinan' => $nama_kerajinan,
+                'deskripsi' => $request->deskripsi[$index] ?? null,
+                'jumlah' => $request->jumlah[$index],
+                'pembuat' => $request->pembuat[$index],
+                'harga_satuan' => $request->harga_satuan[$index],
+            ]);
+        }
+    
+        // Redirect with success message
         return redirect()->route('kerajinan_masuk.index')
                          ->with('success', 'Kerajinan masuk berhasil ditambahkan.');
     }
+    
 
     public function show(KerajinanMasuk $kerajinanMasuk)
     {
@@ -55,7 +67,8 @@ class KerajinanMasukController extends Controller
             'deskripsi' => 'nullable|string',
             'jumlah' => 'required|integer',
             'pembuat' => 'required|string|max:255',
-            'tanggal_masuk' => 'required|date',
+            // 'tanggal_masuk' => 'required|date',
+            'harga_satuan' => 'required|numeric|min:0',
         ]);
 
         $kerajinanMasuk->update($request->all());
