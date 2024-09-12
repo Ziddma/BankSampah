@@ -29,12 +29,10 @@
                 <thead>
                     <tr>
                         <th>ID Penjualan</th>
-                        <th>Nama Barang</th>
-                        <th>Kategori Barang</th>
+                        <th>ID Kerajinan</th>
+                        <th>Nama Kerajinan</th>
+                        <th>Nama Pembeli</th>
                         <th>Jumlah</th>
-                        <th>Satuan</th>
-                        <th>Tanggal Penjualan</th>
-                        <th>Harga</th>
                         <th>Total Harga</th>
                         <th>Aksi</th>
                     </tr>
@@ -42,14 +40,12 @@
                 <tbody>
                     @foreach($kerajinanJual as $item)
                         <tr>
-                            <td>{{ $item->id }}</td> <!-- Changed from idPenjualan to id -->
-                            <td>{{ $item->namaBarang }}</td>
-                            <td>{{ $item->kategoriBarang }}</td>
+                            <td>{{ $item->kode_penjualan }}</td> <!-- Changed from idPenjualan to id -->
+                            <td>{{ $item->kode_barang }}</td>
+                            <td>{{ $item->nama_kerajinan}}</td>
+                            <td>{{ $item->nama_pembeli }}</td>
                             <td>{{ $item->jumlah }}</td>
-                            <td>{{ $item->satuan }}</td>
-                            <td>{{ $item->tglPenjualan->format('d-m-Y') }}</td> <!-- Using Carbon for date formatting -->
-                            <td>{{ number_format($item->harga, 0, ',', '.') }}</td>
-                            <td>{{ number_format($item->totalHarga, 0, ',', '.') }}</td>
+                            <td>Rp {{ number_format($item->harga_total, 0, ',', '.') }}</td>
                             <td>
                                 <a href="{{ route('kerajinan_jual.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
                                 <!-- Tombol Hapus -->
@@ -61,14 +57,6 @@
                             </td>
                         </tr>
                     @endforeach
-                    {{-- <tr>
-                        <td colspan="5" class="text-right font-weight-bold">Total Pendapatan Bulan Ini: </td>
-                        <td colspan="3" class="font-weight-bold">Rp. {{ number_format($totalPendapatanBulan, 0, ',', '.') }}</td>
-                    </tr>
-                    <tr>
-                        <td colspan="5" class="text-right font-weight-bold">Total Pendapatan Tahun Ini: </td>
-                        <td colspan="3" class="font-weight-bold">Rp. {{ number_format($totalPendapatanTahun, 0, ',', '.') }}</td>
-                    </tr> --}}
                 </tbody>
             </table>
         </div>

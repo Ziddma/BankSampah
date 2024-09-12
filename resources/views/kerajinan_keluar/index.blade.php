@@ -66,7 +66,7 @@
                             {{-- <td>{{ $item->tanggal }}</td> --}}
                             <td>{{ $item->keterangan }}</td>
                             <td>
-                                <a href="{{ route('kerajinan_keluar.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                {{-- <a href="{{ route('kerajinan_keluar.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a> --}}
 
                                 <!-- Tombol Hapus -->
                                 <form action="{{ route('kerajinan_keluar.destroy', $item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus kerajinan keluar ini?');">

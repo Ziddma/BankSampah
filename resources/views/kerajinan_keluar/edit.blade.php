@@ -21,53 +21,66 @@
         </div>
     @endif
 
-    <a href="{{ route('kerajinan_keluar.create') }}" class="btn btn-success mb-3">Tambah Data Kerajinan Keluar</a>
-
-    <div class="card shadow mb-4">
-        <div class="card-body">
-            <form action="{{ route('kerajinan_keluar.update', $kerajinanKeluar->id) }}" method="POST">
-                @csrf
-                @method('PUT')
-                <div class="form-group">
-                    <label for="nama_tujuan">Nama Tujuan</label>
-                    <input type="text" id="nama_tujuan" name="nama_tujuan" class="form-control" value="{{ old('nama_tujuan', $kerajinanKeluar->nama_tujuan) }}" required>
+    <div class="container mt-5">
+        <form id="verificationForm" method="POST" action="{{ route('kerajinan_keluar.update', $kerajinanKeluar->id) }}">
+            @csrf
+            @method('PUT')
+            <div class="row">
+                <!-- Kolom 1 -->
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="kode_barang">Kode Barang</label>
+                        <input type="text" class="form-control" id="kode_barang" name="kode_barang" value="{{ old('kode_barang', $sampahMasuk->kode_barang ?? '') }}" readonly>
+                    </div>
+                    <div id="additionalFields" >
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="kategori_id">Kategori</label>
+                                    <input type="text" class="form-control" id="kategori_id" name="kategori_id" value="{{ old('kategori_id', $kerajinanKeluar->kategori_id) }}" readonly>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="satuan_id">Satuan</label>
+                                    <input type="text" class="form-control" id="satuan_id" name="satuan_id" value="{{ old('satuan_id', $kerajinanKeluar->satuan_id) }}" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="produk_id">Produk</label>
+                                    <input type="text" class="form-control" id="produk_id" name="produk_id" value="{{ old('produk_id', $kerajinanKeluar->produk_id) }}" readonly>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="jumlah_tersedia">Jumlah Tersedia</label>
+                                    <input type="text" class="form-control" id="jumlah_tersedia" name="jumlah_tersedia" value="{{ old('jumlah_tersedia', $sampahMasuk->jumlah ?? 0) }}" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="kategori_id">Kategori</label>
-                    <select class="form-control" id="kategori_id" name="kategori_id" required>
-                        <option value="">Pilih Kategori</option>
-                        @foreach($kategoriSampah as $kategori)
-                            <option value="{{ $kategori->id }}" {{ old('kategori_id', $kerajinanKeluar->kategori_id) == $kategori->id ? 'selected' : '' }}>
-                                {{ $kategori->kategori }}
-                            </option>
-                        @endforeach
-                    </select>
+                
+                <!-- Kolom 2 -->
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="input_pemohon">Input Pemohon</label>
+                        <input type="text" class="form-control" id="input_pemohon" name="nama_tujuan" value="{{ old('nama_tujuan', $kerajinanKeluar->nama_tujuan) }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tanggal_masuk">Tanggal Masuk</label>
+                        <input type="date" class="form-control" id="tanggal_masuk" name="tanggal" value="{{ old('tanggal', $kerajinanKeluar->tanggal) }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="jumlah_pengambilan">Jumlah Pengambilan</label>
+                        <input type="number" class="form-control" id="jumlah_pengambilan" name="jumlah" value="{{ old('jumlah', $kerajinanKeluar->jumlah) }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="keterangan">Keterangan</label>
+                        <textarea class="form-control" id="keterangan" name="keterangan">{{ old('keterangan', $kerajinanKeluar->keterangan) }}</textarea>
+                    </div>
+                    <button type="submit" class="btn btn-success">Submit</button>
                 </div>
-                <div class="form-group">
-                    <label for="jumlah">Jumlah</label>
-                    <input type="number" id="jumlah" name="jumlah" class="form-control" value="{{ old('jumlah', $kerajinanKeluar->jumlah) }}" required>
-                </div>
-                <div class="form-group">
-                    <label for="satuan_id">Satuan</label>
-                    <select class="form-control" id="satuan_id" name="satuan_id" required>
-                        <option value="">Pilih Satuan</option>
-                        @foreach($satuanSampah as $satuan)
-                            <option value="{{ $satuan->id }}" {{ old('satuan_id', $kerajinanKeluar->satuan_id) == $satuan->id ? 'selected' : '' }}>
-                                {{ $satuan->satuan }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="tanggal">Tanggal</label>
-                    <input type="date" id="tanggal" name="tanggal" class="form-control" value="{{ $kerajinanKeluar->tanggal }}" required>
-                </div>
-                <div class="form-group">
-                    <label for="keterangan">Keterangan</label>
-                    <textarea id="keterangan" name="keterangan" class="form-control" required>{{ old('keterangan', $kerajinanKeluar->keterangan) }}</textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Update</button>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 @endsection

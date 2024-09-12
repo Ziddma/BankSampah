@@ -13,11 +13,13 @@ return new class extends Migration
     {
         Schema::create('kerajinan_jual', function (Blueprint $table) {
             $table->id();
-            $table->string('tujuan_jual');
-            $table->foreignId('kerajinan_id')->constrained('kerajinan_masuk');
+            $table->string('kode_penjualan')->unique();
+            $table->string('kode_barang');
+            $table->string('nama_pembeli');
+            $table->string('nama_kerajinan');
             $table->integer('jumlah'); 
-            $table->foreignId('satuan_id')->constrained('satuan_sampah');
             $table->decimal('harga', 10, 2)->nullable();
+            $table->decimal('harga_total', 10, 2);
             $table->date('tanggal');
             $table->timestamps();
         });

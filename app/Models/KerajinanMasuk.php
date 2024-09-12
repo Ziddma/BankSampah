@@ -19,4 +19,9 @@ class KerajinanMasuk extends Model
         'pembuat',
         'harga_satuan'
     ];
+
+    public function kerajinan_masuk()
+    {
+        return $this->hasMany(KerajinanMasuk::class);
+    }
 }
