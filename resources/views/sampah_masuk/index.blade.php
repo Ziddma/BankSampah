@@ -45,9 +45,9 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->kode_barang }}</td>
                             <td>{{ $item->nama }}</td>
-                            <td>{{ $item->kategori->kategori }}</td>
-                            <td>{{ $item->satuan->satuan }}</td>
-                            <td>{{ $item->produk->produk }}</td>
+                            <td>{{ $item->kategori->kategori ?? 'N/A' }}</td>
+                            <td>{{ $item->satuan->satuan ?? 'N/A' }}</td>
+                            <td>{{ $item->produk->produk ?? 'N/A' }}</td>
                             <td>{{ number_format($item->jumlah, 0) }}</td>
                             <td>Rp {{ number_format($item->harga_satuan, 0, ',', '.') }}</td>
                             <td>
