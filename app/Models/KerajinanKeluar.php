@@ -23,14 +23,20 @@ class KerajinanKeluar extends Model
 
     public function kategori()
     {
-        return $this->belongsTo(KategoriSampah::class);
+        return $this->belongsTo(KategoriSampah::class, 'kategori_id');
     }
 
+    /**
+     * Get the unit associated with the sale.
+     */
     public function satuan()
     {
-        return $this->belongsTo(SatuanSampah::class);
+        return $this->belongsTo(SatuanSampah::class, 'satuan_id');
     }
 
+    /**
+     * Get the product associated with the sale.
+     */
     public function produk()
     {
         return $this->belongsTo(ProdukSampah::class, 'produk_id');

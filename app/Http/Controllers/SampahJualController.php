@@ -36,6 +36,7 @@ class SampahJualController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         // Validate the incoming request data
         $validatedData = $request->validate([
             'kode_barang' => 'required|string|max:255',
@@ -131,6 +132,7 @@ class SampahJualController extends Controller
      */
     public function update(Request $request, SampahJual $sampahJual)
     {
+        // Validasi data input
         $validatedData = $request->validate([
             'kode_barang' => 'required|string|max:255',
             'nama_pembeli' => 'required|string|max:255',
@@ -151,20 +153,30 @@ class SampahJualController extends Controller
     
         // Ambil stok dari sampah_masuk
         $sampahMasuk = SampahMasuk::where('kode_barang', $sampahJual->kode_barang)->first();
-        
+    
+        // Cek apakah stok mencukupi jika terjadi pengurangan stok
         if (!$sampahMasuk || ($stokAdjustment < 0 && $sampahMasuk->jumlah < abs($stokAdjustment))) {
             return redirect()->back()->withErrors(['jumlah' => 'Jumlah permintaan melebihi stok yang tersedia.'])->withInput();
         }
     
-        // Update data SampahJual
-        $sampahJual->update($validatedData);
+        // Hitung harga total
+        $jumlah = $validatedData['jumlah'];
+        $hargaSatuan = $validatedData['harga'] ?? 0;
+        $totalHarga = $jumlah * $hargaSatuan;
+    
+        // Update data SampahJual termasuk harga total
+        $sampahJual->fill($validatedData);
+        $sampahJual->harga_total = $totalHarga;
+        $sampahJual->save();
     
         // Update stok di sampah_masuk
         $sampahMasuk->jumlah += $stokAdjustment;
         $sampahMasuk->save();
     
+        // Redirect dengan pesan sukses
         return redirect()->route('sampah_jual.index')->with('success', 'Data berhasil diperbarui.');
     }
+    
     
     
 

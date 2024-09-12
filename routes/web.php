@@ -9,6 +9,8 @@ use App\Http\Controllers\KerajinanMasukController;
 use App\Http\Controllers\SatuanSampahController;
 use App\Http\Controllers\ProdukSampahController;
 use App\Http\Controllers\SampahJualController;
+use App\Http\Controllers\KerajinanJualController;
+
 
 
 
@@ -64,7 +66,12 @@ Route::post('/check-sampah-masuk', [KerajinanKeluarController::class, 'checkSamp
 
 Route::post('/verify_kode_barang', [KerajinanKeluarController::class, 'verifyKodeBarang']);
 Route::post('/verify_kode_jual', [SampahJualController::class, 'verifyKodeSampahJual']);
+Route::post('/verify_kode_jual_kerajinan', [KerajinanJualController::class, 'verifyKodeKerajinanJual']);
 Route::post('/kerajinan_keluar/store', [KerajinanKeluarController::class, 'store']);
+
+
+
+route::post('/get_pembuat', [KerajinanJualController::class, 'getPembuat'])->name('get_pembuat');
 
 
 
