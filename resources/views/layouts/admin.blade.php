@@ -7,9 +7,6 @@
     <meta name="description" content="Bank Sampah">
     <meta name="author" content="Alejandro RH">
     
-
-    
-
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -121,6 +118,7 @@
             </a>
         </li> --}}
 
+        
         <!-- Divider -->
         <hr class="sidebar-divider">
 

@@ -13,11 +13,13 @@ class ProfileController extends Controller
     {
         $this->middleware('auth');
     }
+    
 
     public function index()
     {
         return view('profile');
     }
+    
 
     public function update(Request $request)
     {
@@ -46,6 +48,9 @@ class ProfileController extends Controller
 
         $user->save();
 
+        
         return redirect()->route('profile')->withSuccess('Profile updated successfully.');
     }
+    
+
 }
