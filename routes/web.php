@@ -10,8 +10,8 @@ use App\Http\Controllers\SatuanSampahController;
 use App\Http\Controllers\ProdukSampahController;
 use App\Http\Controllers\SampahJualController;
 use App\Http\Controllers\KerajinanJualController;
-
-
+use App\Http\Controllers\SampahMasukViewController;
+use App\Http\Controllers\AboutController;
 
 
 
@@ -73,8 +73,14 @@ Route::post('/kerajinan_keluar/store', [KerajinanKeluarController::class, 'store
 
 route::post('/get_pembuat', [KerajinanJualController::class, 'getPembuat'])->name('get_pembuat');
 
+Route::get('/home_user', 'Home_userController@index')->name('home_user');
+Route::resource('sampah_masuk_view', SampahMasukViewController::class);
+Route::resource('kerajinan_masuk_view', KerajinanMasukViewController::class);
+Route::get('/about_view', [App\Http\Controllers\AboutController::class, 'index'])->name('about_view');
 
-
+Route::get('/', function () {
+    return view('welcome');
+})->name('welcome');
 
 Route::get('/about', function () {
     return view('about');
